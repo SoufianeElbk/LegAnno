@@ -8,7 +8,8 @@ export default {
     theme: {
       extend: {
         fontFamily: {
-            poppins : ["Poppins"],
+            Poppins : ["Poppins"],
+            Roboto : ["Roboto"],
         },
       },
     },
