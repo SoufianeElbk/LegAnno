@@ -5,11 +5,16 @@ export default {
       "./resources/**/*.js",
       "./resources/**/*.vue",
     ],
+    darkMode: 'class',
     theme: {
       extend: {
-        fontFamily: {
-            Poppins : ["Poppins"],
-            Roboto : ["Roboto"],
+        colors: {
+            'customPurple': '#4535C1',
+            'customBleu': '#64CCC5',
+        },
+        fontFamily : {
+            Poppins : 'Poppins',
+            Roboto : 'Roboto',
         },
       },
     },
