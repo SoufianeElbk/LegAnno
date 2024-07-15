@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LegAnno</title>
-    @vite('resources/css/app.css')
+    <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
 </head>
 
 <body class="bg-indigo-700 font-Poppins">
@@ -13,7 +13,7 @@
         <nav class="border-gray-200 bg-indigo-700">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
                 <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{{ asset("/images/logo2.png") }}" class="h-8" alt="Logo" />
+                    <img src="<?php echo e(asset("/images/logo2.png")); ?>" class="h-8" alt="Logo" />
                 </a>
                 <button data-collapse-toggle="navbar-default" type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -45,16 +45,16 @@
                             <a href="#"
                                 class="block py-2 px-3 rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">Infos pratiques</a>
                         </li>
-                        @guest
+                        <?php if(auth()->guard()->guest()): ?>
                         <li class="min-w-fit">
-                            <a href="{{route('login')}}"
+                            <a href="<?php echo e(route('login')); ?>"
                                 class="block py-2 px-3 text-white rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent"><button class="bg-customBleu text-black rounded-lg px-3 py-2">Se connecter</button> </a>
                         </li>
                         <li class="min-w-fit">
-                            <a href="{{route('register')}}"
+                            <a href="<?php echo e(route('register')); ?>"
                                 class="block py-2 px-3 text-white rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent"><button class="bg-customBleu text-black rounded-lg px-3 py-2">S'inscrire</button> </a>
                         </li>
-                        @endguest
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     <button class="rounded-xl bg-yellow-300 text-black p-2 font-bold mt-4 w-full sm:w-fit">Besoin d'aide ?</button>
                 </div>
                 <div class="">
-                    <img src="{{ asset("/images/download.png") }}" alt="" class="w-96">
+                    <img src="<?php echo e(asset("/images/download.png")); ?>" alt="" class="w-96">
                 </div>
             </div>
         </main>
@@ -197,3 +197,4 @@
 </body>
 
 </html>
+<?php /**PATH D:\ENSET\s3\stage\projet\prj\LegAnno\resources\views/home.blade.php ENDPATH**/ ?>

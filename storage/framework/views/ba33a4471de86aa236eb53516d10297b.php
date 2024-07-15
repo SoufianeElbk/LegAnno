@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    @vite('resources/css/app.css')
+    <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
 </head>
 
 <body class="bg-indigo-700 font-Poppins dark:bg-gray-900 dark:text-white">
@@ -14,7 +14,7 @@
         <div class="flex h-screen bg-indigo-700 dark:bg-gray-900">
             <div class="w-full max-w-md m-auto bg-indigo-100 dark:bg-gray-800 rounded p-5">
                 <header>
-                    <img class="w-2/3 mx-auto mb-5" src="{{asset('/images/logo1.png')}}" alt="Logo" />
+                    <img class="w-2/3 mx-auto mb-5" src="<?php echo e(asset('/images/logo1.png')); ?>" alt="Logo" />
                 </header>
                 <form>
                     <div>
@@ -36,14 +36,10 @@
                         <input class="cursor-pointer w-full bg-indigo-700 hover:bg-pink-600 dark:bg-gray-700 dark:hover:bg-pink-600 text-white font-bold py-2 px-4 mb-4 rounded" type="submit" value="Connexion">
                     </div>
                 </form>
-                {{-- @if ($error)
-                    <div class="mb-4">
-                        <p class="text-red-600 dark:text-red-400 font-medium w-fit mx-auto">{{$error}}</p>
-                    </div>
-                @endif --}}
+                
                 <footer>
-                    <a class="text-indigo-700 hover:text-pink-700 dark:text-gray-300 dark:hover:text-pink-700 text-sm float-left" href="{{Route('password.request')}}">Mot de passe oublié ?</a>
-                    <a class="text-indigo-700 hover:text-pink-700 dark:text-gray-300 dark:hover:text-pink-700 text-sm float-right" href="{{Route('register')}}">Creér un Compte</a>
+                    <a class="text-indigo-700 hover:text-pink-700 dark:text-gray-300 dark:hover:text-pink-700 text-sm float-left" href="<?php echo e(Route('password.request')); ?>">Mot de passe oublié ?</a>
+                    <a class="text-indigo-700 hover:text-pink-700 dark:text-gray-300 dark:hover:text-pink-700 text-sm float-right" href="<?php echo e(Route('register')); ?>">Creér un Compte</a>
                 </footer>
             </div>
         </div>
@@ -57,7 +53,7 @@
 <script>
     document.getElementById('toggle-dark-mode').addEventListener('click', function(){
         document.documentElement.classList.toggle('dark');
-        document.querySelector('[alt=Logo]').getAttribute('src') == "/images/logo1.png" ? document.querySelector('[alt=Logo]').setAttribute('src',"{{asset('/images/logo2.png')}}") : document.querySelector('[alt=Logo]').setAttribute('src',"{{asset('/images/logo1.png')}}")
+        document.querySelector('[alt=Logo]').getAttribute('src') == "/images/logo1.png" ? document.querySelector('[alt=Logo]').setAttribute('src',"<?php echo e(asset('/images/logo2.png')); ?>") : document.querySelector('[alt=Logo]').setAttribute('src',"<?php echo e(asset('/images/logo1.png')); ?>")
     });
 </script>
 <script>
@@ -75,3 +71,4 @@
     });
 </script>
 </html>
+<?php /**PATH D:\ENSET\s3\stage\projet\prj\LegAnno\resources\views/login.blade.php ENDPATH**/ ?>
