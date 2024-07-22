@@ -15,7 +15,7 @@
             <div class="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
                 <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 bg-white rounded-lg dark:bg-gray-700">
                     <div>
-                        <a href="{{Route('home')}}"><img src="{{asset('images/logo1.png')}}" class="w-2/3 mx-auto" alt="Logo"/> </a>
+                        <a href="{{Route('accueil')}}"><img src="{{asset('images/logo1.png')}}" class="w-2/3 mx-auto" alt="Logo"/> </a>
                     </div>
                     <div class="mt-8 flex flex-col items-center">
                         <h1 class="text-2xl lg:text-3xl font-semibold">

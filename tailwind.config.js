@@ -14,6 +14,8 @@ export default {
         colors: {
             'customPurple': '#4535C1',
             'customBleu': '#64CCC5',
+            'pricing': '#FFF7FC',
+            'menu': '#77E4C8',
         },
         fontFamily : {
             Poppins : 'Poppins',

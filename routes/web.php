@@ -14,18 +14,67 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// USER ROUTES ------------------------------------------------------------->
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return redirect()->route('accueil');
+});
+
+Route::get('/accueil', function () {
+    return view('user.home');
+})->name('accueil');
+
+Route::get('/actualites', function () {
+    return view('actualites');
+})->name('actualites');
+
+Route::get('/annonces-legales-constitution-sarl-sarlau-snc-scs-sca', function () {
+    return view('user.annonces-legales-constitution-sarl-sarlau-snc-scs-sca');
+})->name('annonces-legales-constitution-sarl-sarlau-snc-scs-sca');
+
+// Route::get('/dashboard', function () {
+//     return view('home');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
+
+// END USER ROUTES ------------------------------------------------------------->
+
+// ADMIN ROUTES ------------------------------------------------------------->
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+});
+
+// END ADMIN ROUTES ------------------------------------------------------------->
+
+// MANAGER ROUTES ------------------------------------------------------------->
+Route::prefix("manager")->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    });
+});
+
+// END MANAGER ROUTES ------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
 
 require __DIR__.'/auth.php';
