@@ -3,22 +3,22 @@
 @section('content')
     <div class="container text-white mx-auto p-6">
         @include('user.components.nav')
-        <div class="flex items-bottom py-10 h-screen">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <div class="flex flex-col sm:w-5/6 lg:w-1/2">
+        <div class="flex items-bottom mb-12 p-4">
+            <div class="max-w-screen-xl flex items-center justify-between mx-auto flex-col lg:flex-row">
+                <div class="flex flex-col w-full lg:w-2/3">
                     <h1 class="text-2xl md:text-3xl font-semibold text-justify">Le journal LegAnno est un service spécialisé  dans l'information légale, juridique et financière.</h1>
                     <div class="grid grid-cols-1 md:grid-cols-3 text-sm sm:text-md font-semibold">
                         <button class="rounded-full bg-yellow-300 text-black p-4 mt-4 w-fit hover:bg-yellow-400 md:col-span-2"><a href="#annonces-legales">Publier une annonce légale ?</a></button>
                         <button class="rounded-full bg-yellow-300 text-black p-4 mt-4 w-fit hover:bg-yellow-400 md:justify-self-end">Besoin d'aide ?</button>
                     </div>
                 </div>
-                <div class="">
-                    <img src="{{ asset("/images/download.png") }}" alt="" class="w-96">
+                <div class="w-full lg:w-2/3 mx-auto">
+                    <img src="{{ asset("/images/download.png") }}" alt="" class="h-auto w-full lg:w-2/3 mx-auto">
                 </div>
             </div>
         </div>
-        <div class="mb-12">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="mb-12 p-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
                 <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg">
                     <h1 class="text-xl font-bold mb-4">Publiez votre annonce légale au meilleur prix</h1>
                     <ul class="text-sm md:text-xs space-y-2">
@@ -62,27 +62,28 @@
                 </div>
             </div>
         </div>
-        <div class="mb-12" id="annonces-legales">
-            <h1 class="text-2xl font-medium mb-8"><span class="font-extrabold">LegAnno</span> est un journal agréé qui offre un service de publication d'annonces légales en ligne.</h1>
+        <div class="mb-12 p-4" id="annonces-legales">
+            <div class="">
+            <h1 class="text-4xl font-medium mb-8 w-full text-center"><span class="font-extrabold">LegAnno</span> offre un service de publication d'annonces légales en ligne.</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div class="bg-[#FFF7FC] text-black p-4 rounded-lg">
                     <h1 class="text-2xl font-bold border-b-4 border-indigo-400 w-fit mb-4">Constitution de société</h1>
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Constitution de société SARL, SARLAU, SNC, SCS, SCA</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Constitution de société SARL, SARLAU, SNC, SCS, SCA</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Constitution : Société Anonyme Simplifiée (SAS)</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sas')}}">Constitution : Société Anonyme Simplifiée (SAS)</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Société Anonyme (SA)</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sa')}}">Société Anonyme (SA)</a>
                         </li>
                         <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Groupement d'Intérêt Économique (GIE)</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Groupement d'Intérêt Économique (GIE)</a>
                         </li>
                     </ul>
                 </div>
@@ -90,16 +91,16 @@
                     <h1 class="text-2xl font-bold border-b-4 border-indigo-400 w-fit mb-4">Cessation d'activité</h1>
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Dissolution</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Dissolution</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Clôture de la liquidation</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Clôture de la liquidation</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Continuité de l'activité</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Continuité de l'activité</a>
                         </li>
                     </ul>
                 </div>
@@ -107,44 +108,37 @@
                     <h1 class="text-2xl font-bold border-b-4 border-indigo-400 w-fit mb-4">Modification de société</h1>
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Changement de dirigeant</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Transfert de siège social</a>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Transfert de siège social</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Changement d'objet social</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Changement d'objet social</a>
                         </li>
                         <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Changement de dénomination</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Changement de dénomination</a>
                         </li>
                         <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Transformation de la forme sociale</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Transformation de la forme sociale</a>
                         </li>
                         <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Cession de parts sociales</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Réduction de capital</a>
                         </li>
                         <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Réduction de capital</span>
-                        </li>
-                        <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-6 h-6 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <span>Augmentation de capital</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
+                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Augmentation de capital</a>
                         </li>
                     </ul>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
         @include('user.components.pricing')
     </div>
+    {{-- </div> --}}
     <div class="bg-white">
         @include('user.components.footer')
     </div>

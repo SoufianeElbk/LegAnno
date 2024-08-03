@@ -74,8 +74,14 @@
                     <li>
                         <a href="#" class="text-gray-700 transition hover:opacity-75"> Annonces Légales </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="#" class="text-gray-700 transition hover:opacity-75"> Nous contacter </a>
+                    </li> --}}
+                    <li>
+                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Se connecter </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-700 transition hover:opacity-75"> S'inscrire </a>
                     </li>
                 </ul>
             </div>
@@ -84,6 +90,9 @@
                 <ul class="mt-6 space-y-4 text-sm">
                     <li>
                         <a href="#" class="text-gray-700 transition hover:opacity-75"> Qui sommes-nous ? </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Nous contacter </a>
                     </li>
                     <li>
                         <a href="#" class="text-gray-700 transition hover:opacity-75"> Mentions légales </a>

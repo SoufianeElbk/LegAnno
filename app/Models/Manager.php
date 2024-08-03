@@ -8,12 +8,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable
+class Manager extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $guard = 'admin';
-    
+    protected $guard = 'manager';
+
     /**
      * The attributes that are mass assignable.
      *

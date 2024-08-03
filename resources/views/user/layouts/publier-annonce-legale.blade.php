@@ -101,7 +101,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 my-4 relative" id="form-representant">
                         <div>
                             <label class="block my-2" for="">Type</label>
-                            <select name="" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <select name="type" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                                 <option value="">Personne physique</option>
                                 <option value="">Personne morale</option>
                             </select>

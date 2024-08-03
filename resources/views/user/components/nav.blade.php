@@ -1,4 +1,4 @@
-<nav class="border-gray-200 bg-indigo-700">
+<nav class="border-gray-200 bg-indigo-700 mb-12 p-4">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset("/images/logo2.png") }}" class="h-8" alt="Logo" />
