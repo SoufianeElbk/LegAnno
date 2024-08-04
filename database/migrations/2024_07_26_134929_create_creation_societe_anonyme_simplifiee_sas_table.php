@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('dispositions_statutaires');
             $table->string('avantages');
             // Foreign key constraints
-            $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
+            $table->foreign('annonce_legale_id', 'sas_annonces_legales_fk')->references('id')->on('annonces_legales');
         });
     }
 
