@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('manager_id');
-            $table->unsignedBigInteger('journal_id');
+            $table->unsignedBigInteger('journal_id')->nullable();
             $table->string('type_annonce');
             $table->timestamp('date_creation');
             $table->dateTime('date_paiment');

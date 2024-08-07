@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('journaux', function (Blueprint $table) {
             $table->id();
             $table->date('date_publication');
-            $table->string('nom_journal');
             $table->timestamps();
         });
     }

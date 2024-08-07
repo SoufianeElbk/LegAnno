@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('code_postale_societe');
             $table->string('ville_societe');
             // Le liquidateur
-            $table->enum('type_liquidateur',['Personne physique', 'Personne morale']);
             $table->enum('civilite_liquidateur',['Monsieur', 'Madame']);
             $table->string('nom_liquidateur');
             $table->string('adresse_liquidateur');

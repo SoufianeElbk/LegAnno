@@ -30,8 +30,15 @@ return new class extends Migration
             $table->string('adresse_societe');
             $table->string('code_postal_societe');
             $table->string('ville_societe');
+            $table->unsignedBigInteger('represantant_id');
+            $table->unsignedBigInteger('associe_id');
+            $table->unsignedBigInteger('commissaire_aux_comptes_id');
             // Foreign key constraints
+            $table->foreign('represantant_id')->references('id')->on('represantants');
+            $table->foreign('associe_id')->references('id')->on('associes');
+            $table->foreign('commissaire_aux_comptes_id')->references('id')->on('commissaires_aux_comptes');
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
+
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type_membre',['Personne physique', 'Personne morale']);
             $table->string('qualite_membre');
-            $table->enum('civilite_membre',['Monsieur', 'Madame']);
+            $table->enum('civilite_membre',['Monsieur', 'Madame'])->nullable();
             $table->string('nom_membre');
             $table->string('adresse_membre');
             $table->string('code postal_membre');
