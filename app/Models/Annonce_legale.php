@@ -12,26 +12,24 @@ class Annonce_legale extends Model
     protected $table = 'Annonces_legales';
 
     protected $fillable = [
+        'type_annonce', 'date_validation', 'statut', 'paiement',
         'tribunal', 'date_depot', 'numero_depot', 'numero_rc'
     ];
 
-    public function creation_sarl_sarlau_snc_scs_sca()
+    public function journal()
     {
+        return $this->belongsTo(Journal::class);
+    }
+
+    public function creation_sarl_sarlau_snc_scs_sca() {
         return $this->hasOne(Creation_sarl_sarlau_snc_scs_sca::class);
     }
 
-    public function representants()
-    {
-        return $this->hasMany(Representant::class);
+    public function creation_societe_anonyme_simplifiee_sas() {
+        return $this->hasOne(Creation_societe_anonyme_simplifiee_sas::class);
     }
 
-    public function associes()
-    {
-        return $this->hasMany(Associe::class);
-    }
-
-    public function commissaires()
-    {
-        return $this->hasMany(Commissaire_aux_comptes::class);
+    public function creation_societe_anonyme_sa() {
+        return $this->hasOne(Creation_societe_anonyme_sa::class);
     }
 }

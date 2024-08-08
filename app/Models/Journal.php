@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pack extends Model
+class Journal extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nom', 'prix', 'description', 'nombre_annonces', 'image', 'active'
+        'date_publication'
     ];
+
+    public function annonces_legales() {
+        return $this->hasMany(Annonce_legale::class);
+    }
+
 }

@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pack extends Model
+class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nom', 'prix', 'description', 'nombre_annonces', 'image', 'active'
-    ];
+    protected $fillable = ['user_id', 'pack_id', 'date_commande'];
 }

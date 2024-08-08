@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Membre_organe_administration extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'type_membre', 'civilite_membre', 'nom_membre','rc_membre', 'adresse_membre',
+        'code_postal_membre', 'ville_membre','participation_membre'
+    ];
 }

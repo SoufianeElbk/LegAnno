@@ -18,9 +18,24 @@ class Creation_sarl_sarlau_snc_scs_sca extends Model
         'ville_societe'
     ];
 
-    public function Annonce_legal()
+    public function Annonce_legale()
     {
         return $this->belongsTo(Annonce_legale::class);
+    }
+
+    public function representants()
+    {
+        return $this->hasMany(Representant::class);
+    }
+
+    public function associes()
+    {
+        return $this->hasMany(Associe::class);
+    }
+
+    public function commissaires()
+    {
+        return $this->hasMany(Commissaire_aux_comptes::class);
     }
 
 

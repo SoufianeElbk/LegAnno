@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pack extends Model
+class Facture extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nom', 'prix', 'description', 'nombre_annonces', 'image', 'active'
+        'user_id', 'annonce_legale_id', 'date_commande',
+        'mode_paiement', 'adresse_facturation', 'montant'
     ];
 }
