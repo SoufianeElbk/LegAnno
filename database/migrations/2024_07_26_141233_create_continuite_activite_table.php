@@ -23,8 +23,9 @@ return new class extends Migration
             $table->string('forme_sociale');
             $table->decimal('capital',10,2);
             $table->string('adresse_societe');
-            $table->string('code_postale_societe');
+            $table->string('code_postal_societe');
             $table->string('ville_societe');
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

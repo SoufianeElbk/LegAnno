@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('code postal_membre');
             $table->string('ville_membre');
             $table->unsignedBigInteger('annonce_legale_id');
+            $table->timestamps();
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });
     }

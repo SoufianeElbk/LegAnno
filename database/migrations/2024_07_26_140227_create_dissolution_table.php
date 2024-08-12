@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('forme_sociale');
             $table->decimal('capital',10,2);
             $table->string('adresse_societe');
-            $table->string('code_postale_societe');
+            $table->string('code_postal_societe');
             $table->string('ville_societe');
             // Le liquidateur
             $table->enum('civilite_liquidateur',['Monsieur', 'Madame']);
@@ -33,7 +33,11 @@ return new class extends Migration
             $table->string('ville_liquidateur');
             $table->string('raison_liquidation');
             $table->string('limitation_apportes_aux_pouvoir_du_liquidateur');
-            $table->string('siege_liquidation');
+            $table->string('adresse_liquidation');
+            $table->string('code_postal_liquidation');
+            $table->string('ville_liquidation');
+
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

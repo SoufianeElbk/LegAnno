@@ -27,9 +27,8 @@ return new class extends Migration
             $table->string('ville_societe');
             // Transformation de la forme sociale
             $table->string('transformation_forme_sociale');
-            $table->unsignedBigInteger('represantant_id');
+            $table->timestamps();
             // Foreign key constraints
-            $table->foreign('represantant_id')->references('id')->on('represantants');
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });
     }

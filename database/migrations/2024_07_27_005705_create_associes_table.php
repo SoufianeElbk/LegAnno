@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('adresse_associe');
             $table->string('code_postal_associe');
             $table->string('ville_associe');
-            $table->decimal('participation_associe');
+            $table->decimal('participation_associe')->nullable();
             $table->unsignedBigInteger('annonce_legale_id');
+            $table->timestamps();
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });
     }

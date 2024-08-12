@@ -92,15 +92,15 @@
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Dissolution</a>
+                            <a href="{{route('annonces-legales-dissolution')}}">Dissolution</a>
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Clôture de la liquidation</a>
+                            <a href="{{route('annonces-legales-cloture-de-la-liquidation')}}">Clôture de la liquidation</a>
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Continuité de l'activité</a>
+                            <a href="{{route('annonces-legales-continuite-activite')}}">Continuité de l'activité</a>
                         </li>
                     </ul>
                 </div>
@@ -109,27 +109,27 @@
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Transfert de siège social</a>
+                            <a href="{{route('annonces-legales-transfert-de-siege-social')}}">Transfert de siège social</a>
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Changement d'objet social</a>
+                            <a href="{{route('annonces-legales-changement-objet-social')}}">Changement d'objet social</a>
                         </li>
                         <li  class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Changement de dénomination</a>
+                            <a href="{{route('annonces-legales-changement-denomination')}}">Changement de dénomination</a>
                         </li>
                         <li  class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Transformation de la forme sociale</a>
+                            <a href="{{route('annonces-legales-transformation-forme-sociale')}}">Transformation de la forme sociale</a>
                         </li>
                         <li  class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Réduction de capital</a>
+                            <a href="{{route('annonces-legales-reduction-de-capital')}}">Réduction de capital</a>
                         </li>
                         <li  class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Augmentation de capital</a>
+                            <a href="{{route('annonces-legales-augmentation-capital')}}">Augmentation de capital</a>
                         </li>
                     </ul>
                 </div>

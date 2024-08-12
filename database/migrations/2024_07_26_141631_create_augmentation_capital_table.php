@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('modalite_augmentation_capital');
             $table->string('modalite_liberation_augmentation_capital');
             $table->decimal('liberation');
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

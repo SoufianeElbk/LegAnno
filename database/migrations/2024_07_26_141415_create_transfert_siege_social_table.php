@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('nv_adresse');
             $table->string('nv_code_postale');
             $table->string('nv_ville');
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

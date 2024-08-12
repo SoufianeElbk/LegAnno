@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('code_postal_commissaire');
             $table->string('ville_commissaire');
             $table->unsignedBigInteger('annonce_legale_id');
+            $table->timestamps();
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });
     }

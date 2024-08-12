@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('representants_legaux', function (Blueprint $table) {
             $table->id();
             $table->enum('type_representant',['Personne physique', 'Personne morale']);
-            $table->string('qualite_representant');
+            $table->string('qualite_representant')->nullable();
             $table->enum('civilite_representant',['Monsieur', 'Madame'])->nullable();
             $table->string('nom_representant');
             $table->string('adresse_representant');
-            $table->string('code postal_representant');
+            $table->string('code_postal_representant');
             $table->string('ville_representant');
             $table->unsignedBigInteger('annonce_legale_id');
+            $table->timestamps();
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });
     }

@@ -20,19 +20,4 @@ class Creation_societe_anonyme_sa extends Model
     {
         return $this->belongsTo(Annonce_legale::class);
     }
-
-    public function representants()
-    {
-        return $this->hasMany(Representant::class);
-    }
-
-    public function membres_organe_administration()
-    {
-        return $this->hasMany(Membre_organe_administration::class);
-    }
-
-    public function commissaires()
-    {
-        return $this->hasMany(Commissaire_aux_comptes::class);
-    }
 }

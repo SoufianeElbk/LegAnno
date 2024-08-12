@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('ville_societe');
             // Nouvelle dénomination
             $table->string('nv_denomination');
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

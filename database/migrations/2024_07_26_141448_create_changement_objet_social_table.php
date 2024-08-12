@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('ville_societe');
             // Modification apportée à l'objet social
             $table->longText('modification_apportee_objet_social');
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

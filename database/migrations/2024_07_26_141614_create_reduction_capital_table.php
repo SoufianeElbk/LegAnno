@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('capital_social_avant_reduction');
             $table->integer('nouveau_capital_social');
             $table->string('modalite_reduction_capital');
+            $table->timestamps();
             // Foreign keys constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
         });

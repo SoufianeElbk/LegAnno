@@ -53,11 +53,11 @@
                             <label class="block my-2" for="">Forme sociale</label>
                             <select name="forme_sociale" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                                 <option value="">Choisir la forme sociale</option>
-                                <option value="Société à Responsabilité Limitée (SARL)">Société à Responsabilité Limitée (SARL)</option>
-                                <option value="Société à Responsabilité Limitée à Associé Unique (SARLAU)">Société à Responsabilité Limitée à Associé Unique (SARLAU)</option>
-                                <option value="Société en Commandite Simple (SCS)">Société en Commandite Simple (SCS)</option>
-                                <option value="Société en Commandite par Action (SCA">Société en Commandite par Action (SCA)</option>
-                                <option value="Société en Nom Collectif (SNC)">Société en Nom Collectif (SNC)</option>
+                                <option value="Société à Responsabilité Limitée">Société à Responsabilité Limitée (SARL)</option>
+                                <option value="Société à Responsabilité Limitée à Associé Unique">Société à Responsabilité Limitée à Associé Unique (SARLAU)</option>
+                                <option value="Société en Commandite Simple">Société en Commandite Simple (SCS)</option>
+                                <option value="Société en Commandite par Action">Société en Commandite par Action (SCA)</option>
+                                <option value="Société en Nom Collectif">Société en Nom Collectif (SNC)</option>
                             </select>
                         </div>
                         <div>
@@ -209,7 +209,7 @@
                             </div>
                             <div>
                                 <label class="block my-2" for="">Participation (PARTS)</label>
-                                <input name="associes[0][participation]" type="number" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                <input name="associes[0][participation_associe]" type="number" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                             </div>
                         </div>
                         <button type="button" class="bg-customBleu w-fit p-3 rounded-lg text-black flex space-x-2 items-center" id="ajouterAssocie">
@@ -378,7 +378,7 @@ $(document).ready(function() {
                 </div>
                 <div>
                     <label class="block my-2" for="">Participation (PARTS)</label>
-                    <input name="associes[${sectionIndexAssocie}][participation]" type="number" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                    <input name="associes[${sectionIndexAssocie}][participation_associe]" type="number" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                 </div>
             </div>
         `;

@@ -23,7 +23,7 @@ class Creation_societe_anonyme_simplifiee_sas extends Model
 
     public function representants()
     {
-        return $this->hasMany(Representant::class);
+        return $this->hasMany(Representant_legal::class);
     }
 
     public function membres_organe_administration()

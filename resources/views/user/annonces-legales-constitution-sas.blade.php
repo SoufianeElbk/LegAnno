@@ -48,7 +48,7 @@
                             <label class="block my-2" for="">Forme sociale</label>
                             <select name="forme_sociale" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                                 <option value="">Choisir la forme sociale</option>
-                                <option value="0">Société Anonyme Simplifiée (SAS)</option>
+                                <option value="Société Anonyme Simplifiée">Société Anonyme Simplifiée (SAS)</option>
                             </select>
                         </div>
                         <div>
@@ -230,16 +230,25 @@
 
                 <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
                     <h1 class="text-xl font-bold w-fit border-b-4 border-white">Stipulations statutaires</h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-                        <div>
+                    <div class="">
+                        <div class="my-2">
+                            <p class="text-orange-400 flex space-x-2 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-info-circle w-8"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 11h1v5.5m0 0h1.5m-1.5 0h-1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9.5-4v-.5h.5V8h-.5z"/></svg>
+                                <span class="text-xs md:text-sm">Saisir ici les conditions d'agrément des cessionnaires d'actions et la désignation de l'organe social habilité à statuer sur les demandes d'agrément.</span>
+                            </p>
                             <label class="block my-2" for="">Organe social habilité</label>
                             <textarea name="organe_social_habilite" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></textarea>
                         </div>
-                        <div>
+                        <div class="my-2">
+                            <p class="text-orange-400 flex space-x-2 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-info-circle h-6 w-6"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 11h1v5.5m0 0h1.5m-1.5 0h-1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9.5-4v-.5h.5V8h-.5z"/></svg>
+                                <span>Saisir ici les dispositions statutaires relatives à la constitution de réserves et à la répartition des bénéfices.</span>
+                            </p>
                             <label class="block my-2" for="">Dispositions statutaires</label>
                             <textarea name="dispositions_statutaires" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></textarea>
                         </div>
-                        <div>
+                        <div class="my-2">
+                            <p class="text-orange-400 flex space-x-2 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-info-circle h-6 w-6"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 11h1v5.5m0 0h1.5m-1.5 0h-1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9.5-4v-.5h.5V8h-.5z"/></svg>
+                                <span>Saisir ici les avantages particuliers stipulés au profit de toute personne.</span>
+                            </p>
                             <label class="block my-2" for="">Avantages</label>
                             <textarea name="avantages" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></textarea>
                         </div>

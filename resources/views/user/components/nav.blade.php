@@ -26,7 +26,7 @@
                         class="block py-2 px-3 rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">Commander un pack</a>
                 </li>
                 <li class="hover:border-b-2">
-                    <a href="{{route('actualites')}}"
+                    <a href="{{route('accueil')}}"
                         class="block py-2 px-3 rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">Actualités</a>
                 </li>
                 <li class="hover:border-b-2">

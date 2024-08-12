@@ -20,7 +20,7 @@ return new class extends Migration
             // Société
             $table->string('denomination');
             $table->string('sigle');
-            $table->string('forme_sociale')->default('Société Anonyme Simplifiée (SAS)');
+            $table->string('forme_sociale')->default('Société Anonyme Simplifiée');
             $table->string('objet_social');
             $table->decimal('capital',10,2);
             $table->integer('nombre_actions');
@@ -35,13 +35,8 @@ return new class extends Migration
             $table->string('organe_social_habilite');
             $table->string('dispositions_statutaires');
             $table->string('avantages');
-            $table->unsignedBigInteger('represantant_id');
-            $table->unsignedBigInteger('membre_organe_administration_id');
-            $table->unsignedBigInteger('commissaire_aux_comptes_id');
+            $table->timestamps();
             // Foreign key constraints
-            $table->foreign('represantant_id')->references('id')->on('represantants');
-            $table->foreign('membre_organe_administration_id')->references('id')->on('membres_organe_administration');
-            $table->foreign('commissaire_aux_comptes_id')->references('id')->on('commissaires_aux_comptes');
             $table->foreign('annonce_legale_id', 'sas_annonces_legales_fk')->references('id')->on('annonces_legales');
         });
     }

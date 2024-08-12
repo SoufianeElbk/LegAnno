@@ -12,10 +12,6 @@
 <body class="bg-indigo-700 font-[Poppins]">
     @yield('content')
 
-
-
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const toggleButton = document.querySelector('[data-collapse-toggle]');

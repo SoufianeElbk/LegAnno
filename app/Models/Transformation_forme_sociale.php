@@ -17,9 +17,5 @@ class Transformation_forme_sociale extends Model
     public function Annonce_legal() {
         return $this->belongsTo(Annonce_legale::class);
     }
-
-    public function representants()
-    {
-        return $this->hasMany(Representant::class);
-    }
+    
 }

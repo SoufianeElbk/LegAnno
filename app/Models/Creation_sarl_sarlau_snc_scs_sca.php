@@ -10,7 +10,6 @@ class Creation_sarl_sarlau_snc_scs_sca extends Model
     use HasFactory;
 
     protected $table = 'creation_sarl_sarlau_snc_scs_sca';
-    public $timestamps = false;
     protected $fillable = [
         'nature_acte', 'date_acte', 'denomination', 'sigle', 'forme_sociale',
         'objet_social', 'capital', 'valeur_nominale', 'montant_apports_en_numeraire',
@@ -22,21 +21,5 @@ class Creation_sarl_sarlau_snc_scs_sca extends Model
     {
         return $this->belongsTo(Annonce_legale::class);
     }
-
-    public function representants()
-    {
-        return $this->hasMany(Representant::class);
-    }
-
-    public function associes()
-    {
-        return $this->hasMany(Associe::class);
-    }
-
-    public function commissaires()
-    {
-        return $this->hasMany(Commissaire_aux_comptes::class);
-    }
-
 
 }

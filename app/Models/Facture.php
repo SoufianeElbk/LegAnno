@@ -13,4 +13,9 @@ class Facture extends Model
         'user_id', 'annonce_legale_id', 'date_commande',
         'mode_paiement', 'adresse_facturation', 'montant'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
