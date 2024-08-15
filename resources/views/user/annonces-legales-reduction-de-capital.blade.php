@@ -13,10 +13,11 @@
             <h3 class="mt-4">Ce modèle d'annonce légale en ligne vous permet de publier une Annonce légale - Réduction de capital dans un journal d'annonces légales habilité.</h3>
         </div>
         <form action="{{route('annonces-legales-reduction-de-capital')}}" method="POST">
+            @csrf
             <div class="w-full lg:w-3/4 mx-auto text-sm">
 
                 <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">La décision</h1>
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">La décision</h1>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
                         <div>
                             <label class="block my-2" for="">Organe de décision</label>
@@ -38,8 +39,8 @@
                 </div>
 
                 <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">La société</h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">La société</h1>
+                    <div class="grid grid-cols-1 gap-x-12">
                         <div>
                             <label class="block my-2" for="">Dénomination</label>
                             <input name="denomination" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
@@ -76,7 +77,7 @@
                 </div>
 
                 <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">Adresse du siège social</h1>
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">Adresse du siège social</h1>
                     <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
                         <div class="lg:col-span-2">
                             <label class="block my-2" for="">Adresse</label>
@@ -94,8 +95,8 @@
                 </div>
 
                 <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">Nouveau capital</h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">Nouveau capital</h1>
+                    <div class="grid grid-cols-1 gap-x-12">
                         <div>
                             <label class="block my-2" for="">Montant de la réduction du capital social (DH)</label>
                             <input name="montant_reduction_capital_social" type="number" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
@@ -120,19 +121,15 @@
                 </div>
 
                 <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold w-fit border-b-4 border-white">Dépôt légal</h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
+                    <h1 class="text-xl font-bold w-fit border-b-4 border-black">Dépôt légal</h1>
+                    <div class="grid grid-cols-1 gap-x-8">
                         <div>
                             <label class="block my-2" for="">Tribunal</label>
-                            <select name="tribunal" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
-                                <option value="">Choisir le tribunal</option>
-                                <option value="">Tribunal 1</option>
-                                <option value="">Tribunal 2</option>
-                            </select>
+                            <input name="tribunal" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                         </div>
                         <div>
                             <label class="block my-2" for="">Date de dépôt</label>
-                            <input name="date_depot_legal" type="date" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="date_depot" type="date" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                         </div>
                         <div>
                             <label class="block my-2" for="">Numéro de dépôt</label>

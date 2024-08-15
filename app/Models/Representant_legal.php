@@ -12,7 +12,7 @@ class Representant_legal extends Model
     protected $table = 'representants_legaux';
 
     protected $fillable = [
-        'type_representant', 'qualite_representant', 'civilite_representant', 'nom_representant','rc_representant', 'adresse_representant',
+        'qualite_representant', 'civilite_representant', 'nom_representant', 'adresse_representant',
         'code_postal_representant', 'ville_representant','participation_representant'
     ];
 

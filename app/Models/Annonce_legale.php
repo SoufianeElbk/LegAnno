@@ -70,6 +70,10 @@ class Annonce_legale extends Model
         return $this->hasOne(Continuite_activite::class);
     }
 
+    public function transfert_siege_social() {
+        return $this->hasOne(Transfert_siege_social::class);
+    }
+
     public function changement_objet_social() {
         return $this->hasOne(Changement_objet_social::class);
     }
@@ -80,10 +84,6 @@ class Annonce_legale extends Model
 
     public function transformation_forme_sociale() {
         return $this->hasOne(Transformation_forme_sociale::class);
-    }
-
-    public function transfert_siege_social() {
-        return $this->hasOne(Transfert_siege_social::class);
     }
 
     public function reduction_capital() {

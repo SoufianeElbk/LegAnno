@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('commissaires_aux_comptes', function (Blueprint $table) {
             $table->id();
-            $table->enum('type_commissaire',['Personne physique', 'Personne morale']);
-            $table->enum('civilite_commissaire',['Monsieur', 'Madame'])->nullable();
+            $table->enum('civilite_commissaire',['Monsieur', 'Madame']);
             $table->string('nom_commissaire');
             $table->string('adresse_commissaire');
             $table->string('code_postal_commissaire');

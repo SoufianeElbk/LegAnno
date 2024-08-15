@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Annonce_legale;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class AnnonceController extends Controller
 {
@@ -33,7 +34,7 @@ class AnnonceController extends Controller
         return view('user.annonces-legales-continuite-activite');
     }
 
-    public function index_annonces_legales_transfert_de_siege_social(){
+    public function index_annonces_legales_transfert_siege_social(){
         return view('user.annonces-legales-transfert-de-siege-social');
     }
 
@@ -49,7 +50,7 @@ class AnnonceController extends Controller
         return view('user.annonces-legales-transformation-forme-sociale');
     }
 
-    public function index_annonces_legales_reduction_de_capital(){
+    public function index_annonces_legales_reduction_capital(){
         return view('user.annonces-legales-reduction-de-capital');
     }
 
@@ -62,7 +63,6 @@ class AnnonceController extends Controller
             'user_id' => Auth::user()->id,
             'type_annonce' => 'Constitution d\'une '.$request->forme_sociale,
             'num_type' => 1,
-            // 'type_annonce' => 'Constitution de société SARL, SARLAU, SNC, SCS, SCA',
             'tribunal' => $request->tribunal,
             'date_depot' => $request->date_depot,
             'numero_depot' => $request->numero_depot,
@@ -98,9 +98,7 @@ class AnnonceController extends Controller
                 $annonce->commissaires()->create($commissaire);
             }
         }
-
-        return redirect()->route('annonces-legales-paiement', [1, $annonce->id]);
-        // return redirect()->route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')->with('success', 'Annonce crée avec succès');
+        return redirect()->route('annonces-legales-paiement', [1, $annonce->id])->with('success', 'Annonce crée avec succès');
     }
 
     public function store_annonces_legales_constitution_sas(Request $request) {
@@ -162,7 +160,7 @@ class AnnonceController extends Controller
             'numero_depot' => $request->numero_depot,
             'numero_rc' => $request->numero_rc,
         ]);
-        $creation_sa = $annonce->_sa_societe_anonyme_simplifiee_sa()->create([
+        $creation_sa = $annonce->creation_societe_anonyme_sa()->create([
             'nature_acte' => $request->nature_acte,
             'date_acte' => $request->date_acte,
             'denomination' => $request->denomination,
@@ -207,7 +205,7 @@ class AnnonceController extends Controller
             'type_annonce' => 'Dissolution',
             'num_type' => 4,
             'tribunal' => $request->tribunal,
-            'date_depot' => Date('Y-m-d'),
+            'date_depot' => $request->date_depot,
             'numero_depot' => $request->numero_depot,
             'numero_rc' => $request->numero_rc,
         ]);
@@ -228,9 +226,9 @@ class AnnonceController extends Controller
             'ville_liquidateur' => $request->ville_liquidateur,
             'raison_liquidation' => $request->raison_liquidation,
             'limitation_apportes_aux_pouvoir_du_liquidateur' => $request->limitation_apportes_aux_pouvoir_du_liquidateur,
-            // 'adresse_liquidation' => $request->adresse_liquidation,
-            // 'code_postal_liquidation' => $request->code_postal_liquidation,
-            // 'ville_liquidation' => $request->ville_liquidation,
+            'adresse_liquidation' => $request->adresse_liquidation,
+            'code_postal_liquidation' => $request->code_postal_liquidation,
+            'ville_liquidation' => $request->ville_liquidation,
         ]);
 
         // return redirect()->route('annonces-legales-dissolution')->with('success', 'Annonce crée avec succès');
@@ -292,11 +290,10 @@ class AnnonceController extends Controller
             'ville_societe' => $request->ville_societe,
         ]);
 
-        // return redirect()->route('annonces-legales-continuite-activite')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [6, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [6, $annonce->id])->with('success', 'Annonce crée avec succès');
     }
 
-    public function store_annonces_legales_transfert_de_siege_social(Request $request) {
+    public function store_annonces_legales_transfert_siege_social(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
             'type_annonce' => 'Transfert de siège social',
@@ -306,7 +303,7 @@ class AnnonceController extends Controller
             'numero_depot' => $request->numero_depot,
             'numero_rc' => $request->numero_rc,
         ]);
-        $transfert_de_siege_social = $annonce->transfert_de_siege_social()->create([
+        $transfert_siege_social = $annonce->transfert_siege_social()->create([
             'organe_decision' => $request->organe_decision,
             'date_decision' => $request->date_decision,
             'denomination' => $request->denomination,
@@ -346,7 +343,7 @@ class AnnonceController extends Controller
             'adresse_societe' => $request->adresse_societe,
             'code_postal_societe' => $request->code_postal_societe,
             'ville_societe' => $request->ville_societe,
-            'modification_apportee_objet_social' => $request->modification_apportee_objet_social,
+            'modification_objet_social' => $request->modification_objet_social,
         ]);
 
         // return redirect()->route('annonces-legales-changement-objet-social')->with('success', 'Annonce crée avec succès');
@@ -400,7 +397,7 @@ class AnnonceController extends Controller
             'adresse_societe' => $request->adresse_societe,
             'code_postal_societe' => $request->code_postal_societe,
             'ville_societe' => $request->ville_societe,
-            'transformation_forme_sociale' => $request->transformation_forme_sociale,
+            'nv_forme_sociale' => $request->nv_forme_sociale,
         ]);
 
         foreach ($request->representants as $representant) {
@@ -411,7 +408,7 @@ class AnnonceController extends Controller
         return redirect()->route('annonces-legales-paiement', [10, $annonce->id]);
     }
 
-    public function store_annonces_legales_reduction_de_capital(Request $request) {
+    public function store_annonces_legales_reduction_capital(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
             'type_annonce' => 'Réduction de capital',
@@ -421,7 +418,7 @@ class AnnonceController extends Controller
             'numero_depot' => $request->numero_depot,
             'numero_rc' => $request->numero_rc,
         ]);
-        $reduction_de_capital = $annonce->reduction_de_capital()->create([
+        $reduction_capital = $annonce->reduction_capital()->create([
             'organe_decision' => $request->organe_decision,
             'date_decision' => $request->date_decision,
             'denomination' => $request->denomination,
@@ -438,7 +435,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-reduction-de-capital')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [11, $annonce->id1]);
+        return redirect()->route('annonces-legales-paiement', [11, $annonce->id]);
     }
 
     public function store_annonces_legales_augmentation_capital(Request $request) {
@@ -473,5 +470,31 @@ class AnnonceController extends Controller
         // return redirect()->route('annonces-legales-augmentation-de-capital')->with('success', 'Annonce crée avec succès');
         return redirect()->route('annonces-legales-paiement', [12, $annonce->id]);
     }
+
+    public function index(Request $request) {
+        $annonces = Auth::user()->annonces_legales()->with([
+            'creation_sarl_sarlau_snc_scs_sca',
+            'creation_societe_anonyme_simplifiee_sas',
+            'creation_societe_anonyme_sa',
+            'dissolution',
+            'cloture_liquidation',
+            'continuite_activite',
+            'transfert_siege_social',
+            'changement_objet_social',
+            'changement_denomination',
+            'transformation_forme_sociale',
+            'reduction_capital',
+            'augmentation_capital',
+            'representants',
+            'associes',
+            'commissaires'
+        ])->get();
+        return view('user.mes-annonces', compact('annonces'));
+    }
+
+    public function create() {
+        return view('user.mes-annonces');
+    }
+
 
 }

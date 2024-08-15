@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="mb-12 p-4">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-auto max-w-screen-xl">
                 <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg">
                     <h1 class="text-xl font-bold mb-4">Publiez votre annonce légale au meilleur prix</h1>
                     <ul class="text-sm md:text-xs space-y-2">
@@ -42,10 +42,10 @@
                         </li>
                     </ul>
                 </div>
-                <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg">
+                <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg grid">
                     <h1 class="text-xl font-bold mb-4">Packs de recharges d’annonces légales</h1>
                     <p class="text-sm md:text-xs">Plus de 30% de réductionsur le prix unitaire !</p>
-                    <button class="mt-8 w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"><a href="#packs">Commander un pack</a></button>
+                    <button class="w-full h-fit self-end py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"><a href="#packs">Commander un pack</a></button>
                 </div>
                 <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg grid grid-cols-3">
                     <div>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="mb-12 p-4" id="annonces-legales">
-            <div class="">
+            <div class=" mx-auto max-w-screen-xl">
             <h1 class="text-4xl font-medium mb-8 w-full text-center"><span class="font-extrabold">LegAnno</span> offre un service de publication d'annonces légales en ligne.</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div class="bg-[#FFF7FC] text-black p-4 rounded-lg">
@@ -80,10 +80,6 @@
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
                             <a href="{{route('annonces-legales-constitution-sa')}}">Société Anonyme (SA)</a>
-                        </li>
-                        <li  class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-arrow-right w-5 h-5 mr-2 text-blue-400"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6 6m6-6l-6-6"/></svg>
-                            <a href="{{route('annonces-legales-constitution-sarl-sarlau-snc-scs-sca')}}">Groupement d'Intérêt Économique (GIE)</a>
                         </li>
                     </ul>
                 </div>

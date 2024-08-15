@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('representants_legaux', function (Blueprint $table) {
             $table->id();
-            $table->enum('type_representant',['Personne physique', 'Personne morale']);
-            $table->string('qualite_representant')->nullable();
-            $table->enum('civilite_representant',['Monsieur', 'Madame'])->nullable();
+            $table->string('qualite_representant');
+            $table->enum('civilite_representant',['Monsieur', 'Madame']);
             $table->string('nom_representant');
             $table->string('adresse_representant');
             $table->string('code_postal_representant');

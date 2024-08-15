@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnnonceController;
+use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\PackController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,12 @@ Route::post('/annonces-legales-paiement-{type_annonce}-{id}', [PaiementControlle
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/packs', [CommandeController::class , 'create'])->name('packs.create');
+    Route::post('/packs', [CommandeController::class , 'store'])->name('packs.store');
+    
+    // Route::get('/mes-annonces', [AnnonceController::class , 'create'])->name('mes-annonces.create');
+    Route::get('/mes-annonces', [AnnonceController::class , 'index'])->name('mes-annonces.index');
+
     Route::get('/annonces-legales-constitution-sarl-sarlau-snc-scs-sca', [AnnonceController::class, 'index_annonces_legales_constitution_sarl_sarlau_snc_scs_sca'])->name('annonces-legales-constitution-sarl-sarlau-snc-scs-sca');
     Route::post('/annonces-legales-constitution-sarl-sarlau-snc-scs-sca', [AnnonceController::class, 'store_annonces_legales_constitution_sarl_sarlau_snc_scs_sca'])->name('annonces-legales-constitution-sarl-sarlau-snc-scs-sca');
 
@@ -52,10 +60,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/annonces-legales-cloture-de-la-liquidation', [AnnonceController::class, 'store_annonces_legales_cloture_de_la_liquidation'])->name('annonces-legales-cloture-de-la-liquidation');
 
     Route::get('/annonces-legales-continuite-activite', [AnnonceController::class, 'index_annonces_legales_continuite_activite'])->name('annonces-legales-continuite-activite');
-    Route::post('/annonces-legales-continuite-activite', [AnnonceController::class, 'index_annonces_legales_continuite_activite'])->name('annonces-legales-continuite-activite');
+    Route::post('/annonces-legales-continuite-activite', [AnnonceController::class, 'store_annonces_legales_continuite_activite'])->name('annonces-legales-continuite-activite');
 
-    Route::get('/annonces-legales-transfert-de-siege-social', [AnnonceController::class, 'index_annonces_legales_transfert_de_siege_social'])->name('annonces-legales-transfert-de-siege-social');
-    Route::post('/annonces-legales-transfert-de-siege-social', [AnnonceController::class, 'store_annonces_legales_transfert_de_siege_social'])->name('annonces-legales-transfert-de-siege-social');
+    Route::get('/annonces-legales-transfert-de-siege-social', [AnnonceController::class, 'index_annonces_legales_transfert_siege_social'])->name('annonces-legales-transfert-de-siege-social');
+    Route::post('/annonces-legales-transfert-de-siege-social', [AnnonceController::class, 'store_annonces_legales_transfert_siege_social'])->name('annonces-legales-transfert-de-siege-social');
 
     Route::get('/annonces-legales-changement-objet-social', [AnnonceController::class, 'index_annonces_legales_changement_objet_social'])->name('annonces-legales-changement-objet-social');
     Route::post('/annonces-legales-changement-objet-social', [AnnonceController::class, 'store_annonces_legales_changement_objet_social'])->name('annonces-legales-changement-objet-social');
@@ -66,8 +74,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/annonces-legales-transformation-forme-sociale', [AnnonceController::class, 'index_annonces_legales_transformation_forme_sociale'])->name('annonces-legales-transformation-forme-sociale');
     Route::post('/annonces-legales-transformation-forme-sociale', [AnnonceController::class, 'store_annonces_legales_transformation_forme_sociale'])->name('annonces-legales-transformation-forme-sociale');
 
-    Route::get('/annonces-legales-reduction-de-capital', [AnnonceController::class, 'index_annonces_legales_reduction_de_capital'])->name('annonces-legales-reduction-de-capital');
-    Route::post('/annonces-legales-reduction-de-capital', [AnnonceController::class, 'store_annonces_legales_reduction_de_capital'])->name('annonces-legales-reduction-de-capital');
+    Route::get('/annonces-legales-reduction-de-capital', [AnnonceController::class, 'index_annonces_legales_reduction_capital'])->name('annonces-legales-reduction-de-capital');
+    Route::post('/annonces-legales-reduction-de-capital', [AnnonceController::class, 'store_annonces_legales_reduction_capital'])->name('annonces-legales-reduction-de-capital');
 
     Route::get('/annonces-legales-augmentation-capital', [AnnonceController::class, 'index_annonces_legales_augmentation_capital'])->name('annonces-legales-augmentation-capital');
     Route::post('/annonces-legales-augmentation-capital', [AnnonceController::class, 'store_annonces_legales_augmentation_capital'])->name('annonces-legales-augmentation-capital');

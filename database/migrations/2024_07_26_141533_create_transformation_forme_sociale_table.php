@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('code_postal_societe');
             $table->string('ville_societe');
             // Transformation de la forme sociale
-            $table->string('transformation_forme_sociale');
+            $table->string('nv_forme_sociale');
             $table->timestamps();
             // Foreign key constraints
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');

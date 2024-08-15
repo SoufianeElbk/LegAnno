@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('associes', function (Blueprint $table) {
             $table->id();
-            $table->enum('type_associe',['Personne physique', 'Personne morale']);
-            $table->enum('civilite_associe',['Monsieur', 'Madame'])->nullable();
+            $table->enum('civilite_associe',['Monsieur', 'Madame']);
             $table->string('nom_associe');
-            $table->string('rc_associe')->nullable();
             $table->string('adresse_associe');
             $table->string('code_postal_associe');
             $table->string('ville_associe');
-            $table->decimal('participation_associe')->nullable();
+            $table->decimal('participation_associe');
             $table->unsignedBigInteger('annonce_legale_id');
             $table->timestamps();
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');

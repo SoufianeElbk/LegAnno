@@ -9,6 +9,8 @@ class Cloture_liquidation extends Model
 {
     use HasFactory;
 
+    protected $table = 'cloture_liquidation';
+
     protected $fillable = [
         'organe_decision', 'date_decision', 'denomination', 'sigle', 'forme_sociale',
         'capital', 'adresse_societe', 'code_postal_societe', 'ville_societe',

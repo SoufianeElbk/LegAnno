@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pack_id');
             $table->timestamp('date_commande');
+            $table->string('adresse_facturation');
+            $table->string('mode_paiement');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('pack_id')->references('id')->on('packs');
             $table->timestamps();

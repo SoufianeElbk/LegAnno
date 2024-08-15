@@ -9,6 +9,8 @@ class Augmentation_capital extends Model
 {
     use HasFactory;
 
+    protected $table = 'augmentation_capital';
+
     protected $fillable = [
         'organe_decision', 'date_decision', 'denomination', 'sigle', 'forme_sociale',
         'adresse_societe', 'code_postal_societe', 'ville_societe',

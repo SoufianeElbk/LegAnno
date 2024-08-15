@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('ville_societe');
             // Nouvelle adresse du siège social
             $table->string('nv_adresse');
-            $table->string('nv_code_postale');
+            $table->string('nv_code_postal');
             $table->string('nv_ville');
             $table->timestamps();
             // Foreign keys constraints

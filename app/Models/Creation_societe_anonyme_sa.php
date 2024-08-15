@@ -9,6 +9,8 @@ class Creation_societe_anonyme_sa extends Model
 {
     use HasFactory;
 
+    protected $table = 'creation_societe_anonyme_sa';
+
     protected $fillable = [
         'nature_acte', 'date_acte', 'denomination', 'sigle', 'forme_sociale',
         'objet_social', 'capital', 'nombre_actions', 'valeur_nominale', 'montant_apports_en_numeraire',

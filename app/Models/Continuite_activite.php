@@ -9,6 +9,8 @@ class Continuite_activite extends Model
 {
     use HasFactory;
 
+    protected $table = 'continuite_activite';
+
     protected $fillable = [
         'organe_decision', 'date_decision', 'denomination', 'sigle', 'forme_sociale',
         'capital', 'adresse_societe', 'code_postal_societe', 'ville_societe',

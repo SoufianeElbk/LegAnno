@@ -9,6 +9,8 @@ class Reduction_capital extends Model
 {
     use HasFactory;
 
+    protected $table = 'reduction_capital';
+
     protected $fillable = [
         'organe_decision', 'date_decision', 'denomination', 'sigle', 'forme_sociale',
         'adresse_societe', 'code_postal_societe', 'ville_societe', 'montant_reduction_capital_social',

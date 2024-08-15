@@ -9,10 +9,12 @@ class Transfert_siege_social extends Model
 {
     use HasFactory;
 
+    protected $table = 'transfert_siege_social';
+
     protected $fillable = [
         'organe_decision', 'date_decision', 'denomination', 'sigle', 'forme_sociale',
         'capital', 'adresse_societe', 'code_postal_societe', 'ville_societe',
-        'nv_adresse', 'nv_code_postale', 'nv_ville'
+        'nv_adresse', 'nv_code_postal', 'nv_ville'
     ];
 
     public function Annonce_legal() {

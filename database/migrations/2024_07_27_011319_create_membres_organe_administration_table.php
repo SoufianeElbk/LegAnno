@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('membres_organe_administration', function (Blueprint $table) {
             $table->id();
-            $table->enum('type_membre',['Personne physique', 'Personne morale']);
             $table->string('qualite_membre');
-            $table->enum('civilite_membre',['Monsieur', 'Madame'])->nullable();
+            $table->enum('civilite_membre',['Monsieur', 'Madame']);
             $table->string('nom_membre');
             $table->string('adresse_membre');
-            $table->string('code postal_membre');
+            $table->string('code_postal_membre');
             $table->string('ville_membre');
             $table->unsignedBigInteger('annonce_legale_id');
             $table->timestamps();

@@ -13,14 +13,15 @@
             <h3 class="mt-4">Ce modèle d'annonce légale en ligne vous permet de publier une Annonce légale - Clôture de la liquidation dans un journal d'annonces légales habilité.</h3>
         </div>
         <form action="{{route('annonces-legales-cloture-de-la-liquidation')}}" method="POST">
+        @csrf
             <div class="w-full lg:w-3/4 mx-auto text-sm">
 
                 <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">La décision</h1>
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">La décision</h1>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
                         <div>
                             <label class="block my-2" for="">Organe de décision</label>
-                            <select name="organe_decision" id="" class=" text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <select name="organe_decision" id="" class=" bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                                 <option value="">Choisir l'organe de décision</option>
                                 <option value="Conseil d'administration">Conseil d'administration</option>
                                 <option value="Assemblée générale ordinaire">Assemblée générale ordinaire</option>
@@ -32,25 +33,25 @@
                         </div>
                         <div>
                             <label class="block my-2" for="">Date de décision</label>
-                            <input name="date_decision" type="date" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="date_decision" type="date" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                     </div>
                 </div>
 
                 <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">La société</h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">La société</h1>
+                    <div class="grid grid-cols-1 gap-x-12">
                         <div>
                             <label class="block my-2" for="">Dénomination</label>
-                            <input name="denomination" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="denomination" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Sigle</label>
-                            <input name="sigle" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="sigle" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Forme sociale</label>
-                            <select name="forme_sociale" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <select name="forme_sociale" id="" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                                 <option value="">Choisir la forme sociale</option>
                                 <option value="Société Anonyme">Société Anonyme (SA)</option>
                                 <option value="Société Anonyme à Directoire (SAD)">Société Anonyme à Directoire (SAD)</option>
@@ -74,38 +75,31 @@
                         </div>
                         <div>
                             <label class="block my-2" for="">Capital (DH)</label>
-                            <input name="capital" type="number" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="capital" type="number" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Adresse</label>
-                            <input name="adresse_societe" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="adresse_societe" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Code postal</label>
-                            <input name="code_postal_societe" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="code_postal_societe" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Ville</label>
-                            <input name="ville_societe" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="ville_societe" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                     </div>
                 </div>
 
 
                 <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold border-b-4 border-white w-fit">Le liquidateur</h1>
+                    <h1 class="text-xl font-bold border-b-4 border-black w-fit">Le liquidateur</h1>
                     <div>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 mb-4 relative">
-                            <div>
-                                <label class="block my-2" for="type">Type</label>
-                                <select name="type_liquidateur" id="type" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
-                                    <option value="Personne physique">Personne physique</option>
-                                    <option value="Personne morale">Personne morale</option>
-                                </select>
-                            </div>
+                        <div class="grid grid-cols-1 gap-x-8 mb-4 relative">
                             <div id="civilite-container">
                                 <label class="block my-2" for="civilite">Civilité</label>
-                                <select name="civilite_liquidateur" id="civilite" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                <select name="civilite_liquidateur" id="civilite" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                                     <option value="">Choisir la civilité</option>
                                     <option value="Monsieur">Monsieur</option>
                                     <option value="Madame">Madame</option>
@@ -113,54 +107,50 @@
                             </div>
                             <div>
                                 <label class="block my-2" for="nom">Nom</label>
-                                <input name="nom_liquidateur" type="text" id="nom" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                <input name="nom_liquidateur" type="text" id="nom" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                             </div>
                             <div>
                                 <label class="block my-2" for="adresse">Adresse</label>
-                                <input name="adresse_liquidateur" type="text" id="adresse" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                <input name="adresse_liquidateur" type="text" id="adresse" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                             </div>
                             <div>
                                 <label class="block my-2" for="code-postal">Code postal</label>
-                                <input name="code_postal_liquidateur" type="text" id="code-postal" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                <input name="code_postal_liquidateur" type="text" id="code-postal" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                             </div>
                             <div>
                                 <label class="block my-2" for="ville">Ville</label>
-                                <input name="ville_liquidateur" type="text" id="ville" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                                <input name="ville_liquidateur" type="text" id="ville" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                             </div>
                             <div>
                                 <label class="block my-2" for="">Raison de la liquidation</label>
-                                <textarea name="raison_liquidation" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></textarea>
+                                <textarea name="raison_liquidation" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2"></textarea>
                             </div>
                             <div>
                                 <label class="block my-2" for="">Limitation apportés aux pouvoir du liquidateur (Si applicable)</label>
-                                <textarea name="limitation_apportes_aux_pouvoir_du_liquidateur" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></textarea>
+                                <textarea name="limitation_apportes_aux_pouvoir_du_liquidateur" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
-                    <h1 class="text-xl font-bold w-fit border-b-4 border-white">Dépôt légal</h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
+                    <h1 class="text-xl font-bold w-fit border-b-4 border-black">Dépôt légal</h1>
+                    <div class="grid grid-cols-1 gap-x-8">
                         <div>
                             <label class="block my-2" for="">Tribunal</label>
-                            <select name="tribunal" id="" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
-                                <option value="">Choisir le tribunal</option>
-                                <option value="">Tribunal 1</option>
-                                <option value="">Tribunal 2</option>
-                            </select>
+                            <input name="tribunal" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Date de dépôt</label>
-                            <input name="date_depot_legal" type="date" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="date_depot" type="date" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Numéro de dépôt</label>
-                            <input name="numero_depot" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="numero_depot" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                         <div>
                             <label class="block my-2" for="">Numéro de RC</label>
-                            <input name="numero_rc" type="text" class="text-black w-full px-5 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+                            <input name="numero_rc" type="text" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                     </div>
                 </div>

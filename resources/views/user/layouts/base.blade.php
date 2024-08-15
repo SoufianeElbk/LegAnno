@@ -86,6 +86,12 @@
             document.getElementById('associe').insertBefore(newForm, this);
         });
     </script> --}}
+    <script>
+        document.getElementById('dropdownNavbarLink').addEventListener('click', function() {
+            var dropdown = document.getElementById('dropdownNavbar');
+            dropdown.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>
