@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\AnnonceController;
-use App\Http\Controllers\CommandeController;
-use App\Http\Controllers\PackController;
-use App\Http\Controllers\PaiementController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Manager\ManagerController;
+use App\Http\Controllers\User\AnnonceController;
+use App\Http\Controllers\Manager\AnnonceController as ManagerAnnonceController;
+use App\Http\Controllers\User\CommandeController;
+use App\Http\Controllers\User\PackController;
+use App\Http\Controllers\User\PaiementController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,16 +36,19 @@ Route::get('/accueil', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/annonces-legales-paiement-{type_annonce}-{id}', [PaiementController::class, 'index_annonces_legales_paiement'])->name('annonces-legales-paiement');
-Route::post('/annonces-legales-paiement-{type_annonce}-{id}', [PaiementController::class, 'store_annonces_legales_paiement'])->name('annonces-legales-paiement');
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/annonces-legales-paiement-{id}', [PaiementController::class, 'index_annonces_legales_paiement'])->name('annonces-legales-paiement');
+    Route::post('/annonces-legales-paiement-{id}', [PaiementController::class, 'store_annonces_legales_paiement'])->name('annonces-legales-paiement');
+
     Route::get('/packs', [CommandeController::class , 'create'])->name('packs.create');
     Route::post('/packs', [CommandeController::class , 'store'])->name('packs.store');
-    
+
     // Route::get('/mes-annonces', [AnnonceController::class , 'create'])->name('mes-annonces.create');
     Route::get('/mes-annonces', [AnnonceController::class , 'index'])->name('mes-annonces.index');
+    Route::get('/annonces-publiees', [AnnonceController::class , 'index_annonces_publiees'])->name('annonces-publiees.index');
+    Route::get('/mes-annonces-publiees', [AnnonceController::class , 'index_mes_annonces_publiees'])->name('mes-annonces-publiees.index');
 
     Route::get('/annonces-legales-constitution-sarl-sarlau-snc-scs-sca', [AnnonceController::class, 'index_annonces_legales_constitution_sarl_sarlau_snc_scs_sca'])->name('annonces-legales-constitution-sarl-sarlau-snc-scs-sca');
     Route::post('/annonces-legales-constitution-sarl-sarlau-snc-scs-sca', [AnnonceController::class, 'store_annonces_legales_constitution_sarl_sarlau_snc_scs_sca'])->name('annonces-legales-constitution-sarl-sarlau-snc-scs-sca');
@@ -80,12 +86,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/annonces-legales-augmentation-capital', [AnnonceController::class, 'index_annonces_legales_augmentation_capital'])->name('annonces-legales-augmentation-capital');
     Route::post('/annonces-legales-augmentation-capital', [AnnonceController::class, 'store_annonces_legales_augmentation_capital'])->name('annonces-legales-augmentation-capital');
 
-});
-
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/packs-commandes', [CommandeController::class, 'index'])->name('packs-commandes');
 });
 
 // END USER ROUTES ------------------------------------------------------------->
@@ -93,32 +97,52 @@ Route::middleware('auth')->group(function () {
 // ADMIN ROUTES ------------------------------------------------------------->
 
 Route::prefix('/admin')->group(function(){
-    Route::get('/login', function(){
-        return view('admin.login');
-    })->name('admin.login');
-    Route::get('/accueil', function(){
-        return view('user.home');
-    })->name('admin.home')->middleware('admin');
+    Route::get('/login', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('/login', [AdminController::class, 'store'])->name('admin.store');
+
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('admin');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 // END ADMIN ROUTES ------------------------------------------------------------->
 
+
+
+
+
 // MANAGER ROUTES ------------------------------------------------------------->
-Route::prefix("manager")->group(function () {
-    Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+Route::prefix('/manager')->group(function(){
+    Route::get('/', function () {
+        return redirect()->route('manager.dashboard');
     });
+    Route::get('/dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard')->middleware('manager');
+    Route::middleware('guest:manager')->group(function () {
+        Route::get('/login', [ManagerController::class, 'create'])->name('manager.login.create');
+        Route::post('/login', [ManagerController::class, 'store'])->name('manager.login.store');
+    });
+    Route::get('/annonce-legale-{id}', [ManagerAnnonceController::class, 'create'])->name('manager.annonce-legale.create');
+    Route::patch('/annonce-legale-{id}', [ManagerAnnonceController::class, 'store'])->name('manager.annonce-legale.store');
+
+    Route::get('/annonces-traaitees', [ManagerAnnonceController::class, 'annonces_traitees'])->name('manager.annonces-traitees');
+});
+
+Route::prefix("manager")->group(function () {
+    // Route::middleware('auth')->group(function () {
+    //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // });
 });
 
 // END MANAGER ROUTES ------------------------------------------------------------->
+
 
 
 require __DIR__.'/auth.php';

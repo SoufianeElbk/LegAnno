@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Annonce_legale;
 use App\Models\Facture;
 use Auth;
@@ -9,11 +10,11 @@ use Illuminate\Http\Request;
 
 class PaiementController extends Controller
 {
-    public function index_annonces_legales_paiement($type_annonce, $id){
+    public function index_annonces_legales_paiement($id){
         $annonce = Annonce_legale::find($id);
         if($annonce){
-            if ($annonce->user_id === Auth::id() && $type_annonce == $annonce->num_type){
-                switch($type_annonce){
+            if ($annonce->user_id === Auth::id()){
+                switch($annonce->num_type){
                     case 1 : {
                         $creation_sarl = $annonce->creation_sarl_sarlau_snc_scs_sca()->first();
                         $representants = $annonce->representants()->get();
@@ -25,7 +26,7 @@ class PaiementController extends Controller
                             'representants' => $representants,
                             'associes' => $associes,
                             'commissaires' => $commissaires->count() != 0 ? $commissaires : null,
-                            'type_annonce' => $type_annonce,
+                            'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 2 : {
@@ -39,7 +40,7 @@ class PaiementController extends Controller
                         'representants' => $representants,
                         'membres' => $membres,
                         'commissaires' => $commissaires->count() != 0 ? $commissaires : null,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 3 : {
@@ -53,7 +54,7 @@ class PaiementController extends Controller
                         'representants' => $representants,
                         'membres' => $membres,
                         'commissaires' => $commissaires->count() != 0 ? $commissaires : null,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 4 : {
@@ -61,7 +62,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'dissolution' => $dissolution,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 5 : {
@@ -69,7 +70,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'cloture_liquidation' => $cloture_liquidation,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 6 : {
@@ -77,7 +78,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'continuite_activite' => $continuite_activite,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 7 : {
@@ -85,7 +86,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'transfert_siege_social' => $transfert_siege_social,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 8 : {
@@ -93,7 +94,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'changement_objet_social' => $changement_objet_social,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 9 : {
@@ -101,7 +102,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'changement_denomination' => $changement_denomination,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 10 : {
@@ -111,7 +112,7 @@ class PaiementController extends Controller
                         'annonce' => $annonce,
                         'transformation_forme_sociale' => $transformation_forme_sociale,
                         'representants' => $representants,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 11 : {
@@ -119,7 +120,7 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'reduction_capital' => $reduction_capital,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                     case 12 : {
@@ -127,21 +128,27 @@ class PaiementController extends Controller
                         return view('user.annonces-legales-paiement')->with('Data', [
                         'annonce' => $annonce,
                         'augmentation_capital' => $augmentation_capital,
-                        'type_annonce' => $type_annonce,
+                        'type_annonce' => $annonce->num_type,
                         ]);
                     }
                 }
             }
             else return redirect('/');
         }
-        else return redirect('/');  
+        else return redirect('/');
     }
 
     public function store_annonces_legales_paiement(Request $request){
+        $annonce = Annonce_legale::find($request->annonce_id);
+
+        $annonce->statut = 'en attente de validation';
+
+        $annonce->save();
+
         $facture = Facture::create([
-            'user_id' => $request->user()->id, 
+            'user_id' => $request->user()->id,
             'annonce_legale_id' => $request->annonce_id,
-            'mode_paiement' => $request->mode_paiement, 
+            'mode_paiement' => $request->mode_paiement,
             'adresse_facturation' => $request->adresse_facturation,
             'montant' => 150,
         ]);

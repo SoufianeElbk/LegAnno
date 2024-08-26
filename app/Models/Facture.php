@@ -18,4 +18,9 @@ class Facture extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function annonce_legale()
+    {
+        return $this->belongsTo(Annonce_legale::class);
+    }
 }

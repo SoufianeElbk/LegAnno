@@ -7,7 +7,7 @@
     @include('user.components.nav')
 </div>
 <div class="text-white">
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6 w-5/6">
         <div class="w-full lg:w-3/4 mx-auto mb-8">
             <h1 class="text-3xl font-bold">Annonce légale de création de Société Anonyme Simplifiée (SAS)</h1>
             <h3 class="mt-4">Ce modèle d'annonce légale en ligne vous permet de publier une Annonce légale de création de Société Anonyme Simplifiée (SAS) dans un journal d'annonces légales habilité.</h3>
@@ -250,7 +250,7 @@
                         </button>
                     </div>
                 </div>
-                    
+
 
                 <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
                     <h1 class="text-xl font-bold w-fit border-b-4 border-black">Stipulations statutaires</h1>

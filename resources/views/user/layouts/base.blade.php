@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') | LegAnno</title>
     @vite('resources/css/app.css')
+
 </head>
 
 <body class="bg-indigo-700 font-[Poppins]">
@@ -86,12 +87,15 @@
             document.getElementById('associe').insertBefore(newForm, this);
         });
     </script> --}}
+    @auth
     <script>
         document.getElementById('dropdownNavbarLink').addEventListener('click', function() {
             var dropdown = document.getElementById('dropdownNavbar');
             dropdown.classList.toggle('hidden');
+            // document.getElementById('drop').innerHTML == `<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>` ? document.getElementById('drop').innerHTML = `<path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/>` : document.getElementById('drop').innerHTML = `<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>`;
         });
     </script>
+    @endauth
 </body>
 
 </html>

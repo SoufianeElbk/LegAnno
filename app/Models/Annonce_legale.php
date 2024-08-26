@@ -21,6 +21,16 @@ class Annonce_legale extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function manager()
+    {
+        return $this->belongsTo(Manager::class);
+    }
+
+    public function facture()
+    {
+        return $this->hasOne(Facture::class);
+    }
+
     public function representants()
     {
         return $this->hasMany(Representant_legal::class);

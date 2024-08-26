@@ -20,7 +20,7 @@ class Manager extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nom',
         'email',
         'password',
     ];
@@ -43,4 +43,9 @@ class Manager extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function annonces_legales()
+    {
+        return $this->hasMany(Annonce_legale::class);
+    }
 }

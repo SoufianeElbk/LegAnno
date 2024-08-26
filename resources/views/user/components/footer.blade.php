@@ -1,12 +1,12 @@
-<footer class="container mx-auto bg-white font-medium">
-    <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-12 sm:px-6 lg:space-y-16 lg:px-8">
+<footer class="container mx-auto bg-indigo-700 font-medium text-white">
+    <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-12 sm:px-6 lg:space-y-8 lg:px-8">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
             <div class="lg:col-span-2">
                 <div class="text-teal-600r flex justify-center sm:block">
-                    <img src="{{asset('/images/logo1.png')}}" alt="Logo" class="h-8">
+                    <img src="{{asset('/images/logo2.png')}}" alt="Logo" class="h-8">
                 </div>
 
-                <p class="mt-4 max-w-full text-gray-500 text-justify text-sm sm:text-md">
+                <p class="mt-4 max-w-full text-justify text-sm sm:text-md">
                     Le journal LegAnno Eco est un service spécialisée dans l'information légale, juridique et financière.
                     LegAnno permet aux sociétés et professionnels du chiffre et du droit de publier rapidement et aux meilleurs tarifs leur annonces légales Journal quotidien numérique.
                 </p>
@@ -14,7 +14,7 @@
                 <ul class="mt-8 flex gap-6">
                     <li>
                         <a href="#" rel="noreferrer" target="_blank"
-                            class="text-gray-700 transition hover:opacity-75">
+                            class=" transition hover:opacity-75">
                             <span class="sr-only">Facebook</span>
 
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -27,7 +27,7 @@
 
                     <li>
                         <a href="#" rel="noreferrer" target="_blank"
-                            class="text-gray-700 transition hover:opacity-75">
+                            class=" transition hover:opacity-75">
                             <span class="sr-only">Instagram</span>
 
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -40,7 +40,7 @@
 
                     <li>
                         <a href="#" rel="noreferrer" target="_blank"
-                            class="text-gray-700 transition hover:opacity-75">
+                            class=" transition hover:opacity-75">
                             <span class="sr-only">Twitter</span>
 
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -52,7 +52,7 @@
 
                     <li>
                         <a href="#" rel="noreferrer" target="_blank"
-                            class="text-gray-700 transition hover:opacity-75">
+                            class=" transition hover:opacity-75">
                             <span class="sr-only">GitHub</span>
 
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -69,19 +69,19 @@
                 {{-- <p class="font-medium text-gray-900">Liens</p> --}}
                 <ul class="mt-6 space-y-4 text-sm">
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Accueil </a>
+                        <a href="#" class=" transition hover:opacity-75"> Accueil </a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Annonces Légales </a>
+                        <a href="#" class=" transition hover:opacity-75"> Annonces Légales </a>
                     </li>
                     {{-- <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Nous contacter </a>
+                        <a href="#" class=" transition hover:opacity-75"> Nous contacter </a>
                     </li> --}}
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Se connecter </a>
+                        <a href="#" class=" transition hover:opacity-75"> Se connecter </a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> S'inscrire </a>
+                        <a href="#" class=" transition hover:opacity-75"> S'inscrire </a>
                     </li>
                 </ul>
             </div>
@@ -89,20 +89,20 @@
             <div class="md:justify-self-end">
                 <ul class="mt-6 space-y-4 text-sm">
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Qui sommes-nous ? </a>
+                        <a href="#" class="transition hover:opacity-75"> Qui sommes-nous ? </a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Nous contacter </a>
+                        <a href="#" class="transition hover:opacity-75"> Nous contacter </a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Mentions légales </a>
+                        <a href="#" class="transition hover:opacity-75"> Mentions légales </a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-700 transition hover:opacity-75"> Conditions générales de vente </a>
+                        <a href="#" class="transition hover:opacity-75"> Conditions générales de vente </a>
                     </li>
                 </ul>
             </div>
         </div>
-        <p class="text-sm text-gray-500 text-center font-medium">&copy; <a href="/"> LegAnno</a> {{date('Y')}}. Tous droits réservés.</p>
+        <p class="text-sm text-center font-medium">&copy; <a href="/"> LegAnno</a> {{date('Y')}}. Tous droits réservés.</p>
     </div>
 </footer>

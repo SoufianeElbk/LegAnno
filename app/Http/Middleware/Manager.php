@@ -17,7 +17,7 @@ class Manager
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::guard('manager')->check()){
-            return redirect()->route('manager.login');
+            return redirect()->route('manager.login.create');
         }
         return $next($request);
     }

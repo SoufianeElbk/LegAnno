@@ -10,55 +10,68 @@
 </head>
 
 <body class="bg-indigo-700 font-Poppins dark:bg-gray-800">
-    <div class="container mx-auto ">
-        <div class="min-h-screen bg-indigo-700 text-gray-900 flex justify-center dark:bg-gray-800 dark:text-white">
-            <div class="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
-                <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 bg-white rounded-lg dark:bg-gray-700">
-                    <div>
-                        <a href="{{Route('accueil')}}"><img src="{{asset('images/logo1.png')}}" class="w-2/3 mx-auto" alt="Logo"/> </a>
-                    </div>
-                    <div class="mt-8 flex flex-col items-center">
-                        <h1 class="text-2xl lg:text-3xl font-semibold">
-                            Créez votre compte
-                        </h1>
-                        <div class="w-full flex-1 mt-4">
-                            <div class="mx-auto max-w-xs dark:text-black">
-                                <div class="mt-5 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute ml-2" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-user"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 19v-1.25c0-2.071-1.919-3.75-4.286-3.75h-3.428C7.919 14 6 15.679 6 17.75V19m9-11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    <input
-                                        class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                        type="text" placeholder="Nom complet" />
+
+
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+    <form action="{{Route('register')}}" method="POST">
+    @csrf
+    {{-- @include('user.components.nav') --}}
+        <div class="container mx-auto ">
+            <div class="min-h-screen bg-indigo-700 text-gray-900 flex justify-center dark:bg-gray-800 dark:text-white">
+                <div class="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
+                    <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 bg-white rounded-lg dark:bg-gray-700">
+                        <div>
+                            <a href="{{Route('accueil')}}"><img src="{{asset('images/logo1.png')}}" class="w-2/3 mx-auto" alt="Logo"/> </a>
+                        </div>
+                        <div class="mt-8 flex flex-col items-center">
+                            <h1 class="text-2xl lg:text-3xl font-semibold">
+                                Créez votre compte
+                            </h1>
+                            <div class="w-full flex-1 mt-4">
+                                <div class="mx-auto max-w-xs dark:text-black">
+                                    <div class="mt-5 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute ml-2" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-user"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 19v-1.25c0-2.071-1.919-3.75-4.286-3.75h-3.428C7.919 14 6 15.679 6 17.75V19m9-11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        <input value="{{old('nom')}}"
+                                            name="nom" class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                            type="text" placeholder="Nom complet" />
+                                    </div>
+                                    <div class="mt-5 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute ml-2" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-at-symbol"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 20.064A9 9 0 1121 12v1.5a2.5 2.5 0 01-5 0V8m0 4a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                                        <input value="{{old('email')}}"
+                                            name="email" class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white @if ($errors->has('email')) border-red-500" @endif
+                                            type="email" placeholder="Email" />
+                                    </div>
+                                    <div class="mt-5 flex items-center relative">
+                                        <svg class="absolute ml-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 11.0001V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11.0001M5 22.0001H19C20.1046 22.0001 21 21.1046 21 20.0001V13.0001C21 11.8955 20.1046 11.0001 19 11.0001H5C3.89543 11.0001 3 11.8955 3 13.0001V20.0001C3 21.1046 3.89543 22.0001 5 22.0001Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                        <input name="password"  id="password" class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white  @if ($errors->has('password')) border-red-500" @endif type="password" placeholder="Mot de passe" />
+                                        <svg id="togglePasswordVisibility" xmlns="http://www.w3.org/2000/svg" class="absolute right-0 mr-3 cursor-pointer" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-eye"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M3 12c5.4-8 12.6-8 18 0-5.4 8-12.6 8-18 0z"/><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    </div>
+                                    <div class="mt-5 flex items-center relative">
+                                        <svg class="absolute ml-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 11.0001V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11.0001M5 22.0001H19C20.1046 22.0001 21 21.1046 21 20.0001V13.0001C21 11.8955 20.1046 11.0001 19 11.0001H5C3.89543 11.0001 3 11.8955 3 13.0001V20.0001C3 21.1046 3.89543 22.0001 5 22.0001Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                        <input name="password_confirmation" id="password2" class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white  @if ($errors->has('password_confirmation')) border-red-500" @endif type="password" placeholder="Confirmer votre mot de passe" />
+                                        <svg id="togglePasswordVisibility2" xmlns="http://www.w3.org/2000/svg" class="absolute right-0 mr-3 cursor-pointer" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-eye"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M3 12c5.4-8 12.6-8 18 0-5.4 8-12.6 8-18 0z"/><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    </div>
+                                    <button type="submit" class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">Inscription</button>
+                                    <p class="mt-6 text-xs text-gray-600 text-center dark:text-white">Vous disposez déjà d'un compte ? <a href="{{route('login')}}" class="font-semibold">Se connecter</a></p>
                                 </div>
-                                <div class="mt-5 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute ml-2" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-at-symbol"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 20.064A9 9 0 1121 12v1.5a2.5 2.5 0 01-5 0V8m0 4a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                                    <input
-                                        class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                        type="email" placeholder="Email" />
-                                </div>
-                                <div class="mt-5 flex items-center relative">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute ml-2" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-key"><circle xmlns="http://www.w3.org/2000/svg" cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 16l5.18-5.652C10.033 9.875 10 9.523 10 9a5 5 0 115 5c-.523 0-.868-.01-1.342-.158L12 15.5h-2v2H8v2H5V16z"/></svg>
-                                    <input id="password" class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" type="password" placeholder="Mot de passe" />
-                                    <svg id="togglePasswordVisibility" xmlns="http://www.w3.org/2000/svg" class="absolute right-0 mr-3 cursor-pointer" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-eye"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M3 12c5.4-8 12.6-8 18 0-5.4 8-12.6 8-18 0z"/><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                </div>
-                                <div class="mt-5 flex items-center relative">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute ml-2" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-key"><circle xmlns="http://www.w3.org/2000/svg" cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 16l5.18-5.652C10.033 9.875 10 9.523 10 9a5 5 0 115 5c-.523 0-.868-.01-1.342-.158L12 15.5h-2v2H8v2H5V16z"/></svg>
-                                    <input id="password2" class="w-full px-10 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white dark:bg-" type="password" placeholder="Confirmer votre mot de passe" />
-                                    <svg id="togglePasswordVisibility2" xmlns="http://www.w3.org/2000/svg" class="absolute right-0 mr-3 cursor-pointer" width="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-eye"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M3 12c5.4-8 12.6-8 18 0-5.4 8-12.6 8-18 0z"/><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                </div>
-                                <button class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">Inscription</button>
-                                <p class="mt-6 text-xs text-gray-600 text-center dark:text-white">Vous disposez déjà d'un compte ? <a href="{{route('login')}}" class="font-semibold">Se connecter</a></p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex-1 bg- text-center hidden lg:flex">
-                    <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
-                        style="background-image: url('{{asset("/images/download4.png")}}');">
+                    <div class="flex-1 bg- text-center hidden lg:flex">
+                        <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
+                            style="background-image: url('{{asset("/images/download4.png")}}');">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <label class="inline-flex items-center cursor-pointer absolute top-4 right-4">
         <input type="checkbox" value="" class="sr-only peer">
         <div id="toggle-dark-mode"

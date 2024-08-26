@@ -4,48 +4,28 @@
     <div class="container text-white mx-auto p-6">
         @include('user.components.nav')
         <div class="">
-            <div class="overflow-x-auto mx-auto max-w-screen-xl container">
+            <div class="mx-auto max-w-screen-xl container">
                 <div class="mb-8">
                     <h1 class="text-4xl mb-4 font-bold">Vos annonces légales</h1>
                     <p class="text-md">
                         Ci-dessous, retrouvez l'ensemble des annonces légales que vous avez passées en utilisant notre service de publication d'annonces légales en ligne.
                     </p>
                 </div>
+                <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
-                                #
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date création
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date paiement
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date validation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date publication
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Denomination
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Type annonce
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Statut
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Paiement
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Facture
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                            </th>
+                            <th scope="col" class="px-6 py-3">#</th>
+                            <th scope="col" class="px-6 py-3">Date création</th>
+                            <th scope="col" class="px-6 py-3">Date paiement</th>
+                            <th scope="col" class="px-6 py-3">Date validation</th>
+                            <th scope="col" class="px-6 py-3">Date publication</th>
+                            <th scope="col" class="px-6 py-3">Denomination</th>
+                            <th scope="col" class="px-6 py-3">Type annonce</th>
+                            <th scope="col" class="px-6 py-3">Statut</th>
+                            <th scope="col" class="px-6 py-3">Paiement</th>
+                            <th scope="col" class="px-6 py-3">Facture</th>
+                            <th scope="col" class="px-6 py-3"></th>
                         </tr>
                     </thead>
                     <tbody class="text-xs">
@@ -115,6 +95,10 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+                <div class="mt-4 pagination">
+                    {{ $annonces->links() }}
+                </div>
             </div>
         </div>
     </div>

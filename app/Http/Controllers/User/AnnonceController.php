@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Annonce_legale;
 use Illuminate\Http\Request;
 use Auth;
@@ -98,7 +99,7 @@ class AnnonceController extends Controller
                 $annonce->commissaires()->create($commissaire);
             }
         }
-        return redirect()->route('annonces-legales-paiement', [1, $annonce->id])->with('success', 'Annonce crée avec succès');
+        return redirect()->route('annonces-legales-paiement', [$annonce->id])->with('success', 'Annonce crée avec succès');
     }
 
     public function store_annonces_legales_constitution_sas(Request $request) {
@@ -147,7 +148,7 @@ class AnnonceController extends Controller
         }
 
         // return redirect()->route('annonces-legales-constitution-sas')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [2, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_constitution_sa(Request $request) {
@@ -196,7 +197,7 @@ class AnnonceController extends Controller
         }
 
         // return redirect()->route('annonces-legales-constitution-sa')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [3, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_dissolution(Request $request) {
@@ -232,7 +233,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-dissolution')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [4, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_cloture_de_la_liquidation(Request $request) {
@@ -265,7 +266,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-cloture-de-la-liquidation')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [5, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_continuite_activite(Request $request) {
@@ -290,7 +291,7 @@ class AnnonceController extends Controller
             'ville_societe' => $request->ville_societe,
         ]);
 
-        return redirect()->route('annonces-legales-paiement', [6, $annonce->id])->with('success', 'Annonce crée avec succès');
+        return redirect()->route('annonces-legales-paiement', [$annonce->id])->with('success', 'Annonce crée avec succès');
     }
 
     public function store_annonces_legales_transfert_siege_social(Request $request) {
@@ -319,7 +320,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-transfert-de-siege-social')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [7, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_changement_objet_social(Request $request) {
@@ -347,7 +348,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-changement-objet-social')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [8, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_changement_denomination(Request $request) {
@@ -374,7 +375,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-changement-denomination')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [9, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_transformation_forme_sociale(Request $request) {
@@ -405,7 +406,7 @@ class AnnonceController extends Controller
         }
 
         // return redirect()->route('annonces-legales-transformation-forme-sociale')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [10, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_reduction_capital(Request $request) {
@@ -435,7 +436,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-reduction-de-capital')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [11, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function store_annonces_legales_augmentation_capital(Request $request) {
@@ -468,7 +469,7 @@ class AnnonceController extends Controller
         ]);
 
         // return redirect()->route('annonces-legales-augmentation-de-capital')->with('success', 'Annonce crée avec succès');
-        return redirect()->route('annonces-legales-paiement', [12, $annonce->id]);
+        return redirect()->route('annonces-legales-paiement', [$annonce->id]);
     }
 
     public function index(Request $request) {
@@ -488,8 +489,50 @@ class AnnonceController extends Controller
             'representants',
             'associes',
             'commissaires'
-        ])->get();
+        ])->paginate(10);
         return view('user.mes-annonces', compact('annonces'));
+    }
+    public function index_annonces_publiees(Request $request) {
+        $annonces = Annonce_legale::with([
+            'creation_sarl_sarlau_snc_scs_sca',
+            'creation_societe_anonyme_simplifiee_sas',
+            'creation_societe_anonyme_sa',
+            'dissolution',
+            'cloture_liquidation',
+            'continuite_activite',
+            'transfert_siege_social',
+            'changement_objet_social',
+            'changement_denomination',
+            'transformation_forme_sociale',
+            'reduction_capital',
+            'augmentation_capital',
+            'representants',
+            'associes',
+            'commissaires'
+        ])->paginate(10);
+            // dd($annonces);
+        return view('user.annonces-legales-publiees', compact('annonces'));
+    }
+    public function index_mes_annonces_publiees(Request $request) {
+        $annonces = Auth::user()->annonces_legales()->with([
+            'creation_sarl_sarlau_snc_scs_sca',
+            'creation_societe_anonyme_simplifiee_sas',
+            'creation_societe_anonyme_sa',
+            'dissolution',
+            'cloture_liquidation',
+            'continuite_activite',
+            'transfert_siege_social',
+            'changement_objet_social',
+            'changement_denomination',
+            'transformation_forme_sociale',
+            'reduction_capital',
+            'augmentation_capital',
+            'representants',
+            'associes',
+            'commissaires',
+            'facture',
+        ])->where('statut', 'validée')->paginate(10);
+        return view('user.profile.mes-annonces-publiees', compact('annonces'));
     }
 
     public function create() {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Admin Login</title>
+    <title>Manager Login</title>
 </head>
 <body class="font-[poppins]">
 <div class="bg-blue-400 h-screen w-screen">
@@ -13,9 +13,9 @@
         <div class="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0" style="height: 500px">
             <div class="flex flex-col w-full md:w-1/2 p-4">
                 <div class="flex flex-col flex-1 justify-center mb-8">
-                    <h1 class="text-4xl text-center font-thin">Bienvenue</h1>
+                    <h1 class="text-4xl text-center font-light">Bienvenue</h1>
                     <div class="w-full mt-4">
-                        <form class="form-horizontal w-3/4 mx-auto" method="POST" action="{{route('admin.create')}}">
+                        <form class="form-horizontal w-3/4 mx-auto" method="POST" action="{{route('manager.login.store')}}">
                             @csrf
                             <div class="flex flex-col mt-4">
                                 <input id="email" type="text" class="flex-grow h-8 px-2 border rounded border-grey-400" name="email" value="" placeholder="Email">
@@ -23,10 +23,10 @@
                             <div class="flex flex-col mt-4">
                                 <input id="password" type="password" class="flex-grow h-8 px-2 rounded border border-grey-400" name="password" required placeholder="Mot de passe">
                             </div>
-                            <div class="flex items-center mt-4">
+                            {{-- <div class="flex items-center mt-4">
                                 <input type="checkbox" name="remember" id="remember" class="mr-2"> <label for="remember" class="text-sm text-grey-dark">Se souvenir de moi</label>
-                            </div>
-                            <div class="flex flex-col mt-8">
+                            </div> --}}
+                            <div class="flex flex-col mt-4">
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded">
                                     Login
                                 </button>

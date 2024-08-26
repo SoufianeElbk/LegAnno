@@ -6,7 +6,7 @@
         <div class="flex items-bottom mb-12 p-4">
             <div class="max-w-screen-xl flex items-center justify-between mx-auto flex-col lg:flex-row">
                 <div class="flex flex-col w-full lg:w-2/3">
-                    <h1 class="text-2xl md:text-3xl font-semibold text-justify">Le journal LegAnno est un service spécialisé  dans l'information légale, juridique et financière.</h1>
+                    <h1 class="text-2xl md:text-3xl font-semibold">Le journal LegAnno est un service spécialisé  dans l'information légale, juridique et financière.</h1>
                     <div class="grid grid-cols-1 md:grid-cols-3 text-sm sm:text-md font-semibold">
                         <button class="rounded-full bg-yellow-300 text-black p-4 mt-4 w-fit hover:bg-yellow-400 md:col-span-2"><a href="#annonces-legales">Publier une annonce légale ?</a></button>
                         <button class="rounded-full bg-yellow-300 text-black p-4 mt-4 w-fit hover:bg-yellow-400 md:justify-self-end">Besoin d'aide ?</button>

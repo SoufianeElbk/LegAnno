@@ -1,13 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use Auth;
 
 class CommandeController extends Controller
 {
+
+    public function index() {
+        $commandes = Commande::where('user_id', Auth::id())->with('pack')->paginate(10);
+        return view('user.profile.packs-commandes', compact('commandes'));
+    }
+
     public function create() {
         return view('user.packs');
     }
