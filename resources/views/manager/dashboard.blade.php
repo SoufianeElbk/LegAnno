@@ -41,11 +41,11 @@
                             stroke-linejoin="round"></path>
                     </svg>
 
-                    <span class="mx-3 text-sm">Annonces traaitées</span>
+                    <span class="mx-3 text-sm">Annonces traitées</span>
                 </a>
 
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                    href="/tables">
+                    href="{{Route('manager.annonces-en-attente')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 
                     <span class="mx-3 text-sm">Annonces en attente</span>
@@ -79,10 +79,12 @@
 
                         <div x-cloak x-show="dropdownOpen"
                             class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl">
-                            <a href="#"
+                            <a href="{{Route('manager.profile.edit')}}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
-                            <a href="/login"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Logout</a>
+                            <form method="POST" action="{{ route('manager.logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                                @csrf
+                                <button type="submit" class="w-full text-left">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -107,8 +109,8 @@
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">{{Auth::guard('manager')->user()->count()}}</h4>
-                                        <div class="text-gray-500 text-sm">Annonces traaitées</div>
+                                        <h4 class="text-2xl font-semibold text-gray-700">{{Auth::guard('manager')->user()->annonces_legales()->count()}}</h4>
+                                        <div class="text-gray-500 text-sm">Annonces traitées</div>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +122,7 @@
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">{{Auth::guard('manager')->user()->count()}}</h4>
+                                        <h4 class="text-2xl font-semibold text-gray-700">{{$total}}</h4>
                                         <div class="text-gray-500 text-sm">Annonces en attente</div>
                                     </div>
                                 </div>
@@ -165,8 +167,8 @@
                         </div>
                     </div>
 
-                    <h3 class="text-gray-700 text-3xl font-medium mt-8">Annonces en attente</h3>
-
+                    <h3 class="text-gray-700 text-xl font-medium mt-8">Annonces en attente</h3>
+                    <h6 class="text-blue-700 text-sm font-light"><a href="{{Route('manager.annonces-en-attente')}}">Voir tout</a></h6>
                     <div class="flex flex-col mt-4">
                         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                             <div
@@ -185,54 +187,54 @@
                                     </thead>
 
                                     <tbody class="bg-white">
-                                        @forelse ($annonces as $annonce)
+                                        @forelse ($annonces_en_attente as $annonce_en_attente)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex items-center">
-                                                    <div class="text-sm leading-5 font-medium text-gray-900">{{$annonce->id}}</div>
+                                                    <div class="text-sm leading-5 font-medium text-gray-900">{{$annonce_en_attente->id}}</div>
                                                 </div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">{{$annonce->date_creation}}</div>
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_en_attente->date_creation}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">{{$annonce->date_paiement}}</div>
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_en_attente->date_paiement}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">
-                                                    @if($annonce->creation_sarl_sarlau_snc_scs_sca)
-                                                        {{$annonce->creation_sarl_sarlau_snc_scs_sca->denomination}}
-                                                    @elseif($annonce->creation_societe_anonyme_simplifiee_sas)
-                                                        {{$annonce->creation_societe_anonyme_simplifiee_sas->denomination}}
-                                                    @elseif($annonce->creation_societe_anonyme_sa)
-                                                        {{$annonce->creation_societe_anonyme_sa->denomination}}
-                                                    @elseif($annonce->dissolution)
-                                                        {{$annonce->dissolution->denomination}}
-                                                    @elseif($annonce->cloture_liquidation)
-                                                        {{$annonce->cloture_liquidation->denomination}}
-                                                    @elseif($annonce->continuite_activite)
-                                                        {{$annonce->continuite_activite->denomination}}
-                                                    @elseif($annonce->transfert_siege_social)
-                                                        {{$annonce->transfert_siege_social->denomination}}
-                                                    @elseif($annonce->changement_objet_social)
-                                                        {{$annonce->changement_objet_social->denomination}}
-                                                    @elseif($annonce->changement_denomination)
-                                                        {{$annonce->changement_denomination->denomination}}
-                                                    @elseif($annonce->transformation_forme_sociale)
-                                                        {{$annonce->transformation_forme_sociale->denomination}}
-                                                    @elseif($annonce->reduction_capital)
-                                                        {{$annonce->reduction_capital->denomination}}
-                                                    @elseif($annonce->augmentation_capital)
-                                                        {{$annonce->augmentation_capital->denomination}}
+                                                    @if($annonce_en_attente->creation_sarl_sarlau_snc_scs_sca)
+                                                        {{$annonce_en_attente->creation_sarl_sarlau_snc_scs_sca->denomination}}
+                                                    @elseif($annonce_en_attente->creation_societe_anonyme_simplifiee_sas)
+                                                        {{$annonce_en_attente->creation_societe_anonyme_simplifiee_sas->denomination}}
+                                                    @elseif($annonce_en_attente->creation_societe_anonyme_sa)
+                                                        {{$annonce_en_attente->creation_societe_anonyme_sa->denomination}}
+                                                    @elseif($annonce_en_attente->dissolution)
+                                                        {{$annonce_en_attente->dissolution->denomination}}
+                                                    @elseif($annonce_en_attente->cloture_liquidation)
+                                                        {{$annonce_en_attente->cloture_liquidation->denomination}}
+                                                    @elseif($annonce_en_attente->continuite_activite)
+                                                        {{$annonce_en_attente->continuite_activite->denomination}}
+                                                    @elseif($annonce_en_attente->transfert_siege_social)
+                                                        {{$annonce_en_attente->transfert_siege_social->denomination}}
+                                                    @elseif($annonce_en_attente->changement_objet_social)
+                                                        {{$annonce_en_attente->changement_objet_social->denomination}}
+                                                    @elseif($annonce_en_attente->changement_denomination)
+                                                        {{$annonce_en_attente->changement_denomination->denomination}}
+                                                    @elseif($annonce_en_attente->transformation_forme_sociale)
+                                                        {{$annonce_en_attente->transformation_forme_sociale->denomination}}
+                                                    @elseif($annonce_en_attente->reduction_capital)
+                                                        {{$annonce_en_attente->reduction_capital->denomination}}
+                                                    @elseif($annonce_en_attente->augmentation_capital)
+                                                        {{$annonce_en_attente->augmentation_capital->denomination}}
                                                     @endif
                                                 </div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">{{$annonce->type_annonce}}</div>
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_en_attente->type_annonce}}</div>
                                             </td>
 
                                             {{-- <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -240,7 +242,7 @@
                                             </td> --}}
 
                                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                                <a href="{{Route('manager.annonce-legale.create', $annonce->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">
+                                                <a href="{{Route('manager.annonce-legale.create', $annonce_en_attente->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
                                                     <span>Voir</span>
                                                 </a>
@@ -252,9 +254,111 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="mt-4 pagination">
-                            {{ $annonces->links() }}
+                        {{-- <div class="mt-4 pagination">
+                            {{ $annonces_en_attente->links() }}
+                        </div> --}}
+                    </div>
+
+                    <h3 class="text-gray-700 text-xl font-medium mt-8">Annonces traitées</h3>
+                    <h6 class="text-blue-700 text-sm font-light"><a href="{{Route('manager.annonces-traitees')}}">Voir tout</a></h6>
+                    <div class="flex flex-col mt-4">
+                        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                            <div
+                                class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date création</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Décision</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="bg-white">
+                                        @forelse ($annonces_traitees as $annonce_traitee)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm leading-5 font-medium text-gray-900">{{$annonce_traitee->id}}</div>
+                                                </div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_traitee->date_creation}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_traitee->date_paiement}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">
+                                                    @if($annonce_traitee->creation_sarl_sarlau_snc_scs_sca)
+                                                        {{$annonce_traitee->creation_sarl_sarlau_snc_scs_sca->denomination}}
+                                                    @elseif($annonce_traitee->creation_societe_anonyme_simplifiee_sas)
+                                                        {{$annonce_traitee->creation_societe_anonyme_simplifiee_sas->denomination}}
+                                                    @elseif($annonce_traitee->creation_societe_anonyme_sa)
+                                                        {{$annonce_traitee->creation_societe_anonyme_sa->denomination}}
+                                                    @elseif($annonce_traitee->dissolution)
+                                                        {{$annonce_traitee->dissolution->denomination}}
+                                                    @elseif($annonce_traitee->cloture_liquidation)
+                                                        {{$annonce_traitee->cloture_liquidation->denomination}}
+                                                    @elseif($annonce_traitee->continuite_activite)
+                                                        {{$annonce_traitee->continuite_activite->denomination}}
+                                                    @elseif($annonce_traitee->transfert_siege_social)
+                                                        {{$annonce_traitee->transfert_siege_social->denomination}}
+                                                    @elseif($annonce_traitee->changement_objet_social)
+                                                        {{$annonce_traitee->changement_objet_social->denomination}}
+                                                    @elseif($annonce_traitee->changement_denomination)
+                                                        {{$annonce_traitee->changement_denomination->denomination}}
+                                                    @elseif($annonce_traitee->transformation_forme_sociale)
+                                                        {{$annonce_traitee->transformation_forme_sociale->denomination}}
+                                                    @elseif($annonce_traitee->reduction_capital)
+                                                        {{$annonce_traitee->reduction_capital->denomination}}
+                                                    @elseif($annonce_traitee->augmentation_capital)
+                                                        {{$annonce_traitee->augmentation_capital->denomination}}
+                                                    @endif
+                                                </div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_traitee->type_annonce}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                                                    @if($annonce_traitee->statut == 'validée')
+                                                        bg-green-100 text-green-800
+                                                    @elseif($annonce_traitee->statut == 'annulée')
+                                                        bg-red-100 text-red-800
+                                                    @endif">
+                                                    {{ucfirst($annonce_traitee->statut)}}
+                                                </span>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+                                                <a href="{{Route('manager.annonce-legale.create', $annonce_traitee->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                                                    <span>Voir</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="6">Sans</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                        {{-- <div class="mt-4 pagination">
+                            {{ $annonces_traitees->links() }}
+                        </div> --}}
                     </div>
                 </div>
             </main>

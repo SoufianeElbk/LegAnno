@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nom', 'email', 'password',
+        'nom', 'email', 'solde', 'password',
     ];
 
     public function annonces_legales()

@@ -26,13 +26,13 @@
             </div>
 
             <nav class="mt-10">
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="/">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{Route('manager.dashboard')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-dashboard size-6"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zm10-3a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1h-4a1 1 0 01-1-1v-6z"/></svg>
                     <span class="mx-3 text-sm">Dashboard</span>
                 </a>
 
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                    href="/ui-elements">
+                    href="{{Route('manager.annonces-traitees')}}">
                     <svg class="size-6" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -41,7 +41,7 @@
                             stroke-linejoin="round"></path>
                     </svg>
 
-                    <span class="mx-3 text-sm">Annonces traaitées</span>
+                    <span class="mx-3 text-sm">Annonces traitées</span>
                 </a>
 
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
@@ -83,10 +83,12 @@
 
                         <div x-cloak x-show="dropdownOpen"
                             class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl">
-                            <a href="#"
+                            <a href="{{Route('manager.profile.edit')}}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
-                            <a href="/login"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Logout</a>
+                            <form method="POST" action="{{ route('manager.logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                                @csrf
+                                <button type="submit" class="w-full text-left">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -367,13 +369,12 @@
                                 @endif
                             </div>
                             <div class="mt-4 flex space-x-4 justify-between">
-                                <form class="w-full" action="{{Route('manager.annonce-legale.store', $Data['annonce']->id)}}" method="POST">
+                                <form class="w-full" action="{{Route('manager.annonce-legale.approuver', $Data['annonce']->id)}}" method="POST">
                                     @csrf
-                                    @method('patch')
-                                    <input type="hidden" name="choix" value="1">
+                                    {{-- @method('patch') --}}
                                     <button type="submit" class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Approuver</button>
                                 </form>
-                                <form class="w-full" action="{{Route('manager.annonce-legale.store', $Data['annonce']->id)}}" method="POST">
+                                <form class="w-full" action="{{Route('manager.annonce-legale.annuler', $Data['annonce']->id)}}" method="POST">
                                     @csrf
                                     @method('patch')
                                     {{-- <input type="hidden" name="choix" value="0"> --}}

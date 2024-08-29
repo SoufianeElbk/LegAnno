@@ -8,11 +8,13 @@ use App\Models\Manager;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class ManagerController extends Controller
 {
-    public function dashboard(Request $request) {
-        $annonces = Annonce_legale::where('statut' , '=', 'en attente de validation')->with([
+    public function dashboard() {
+        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->with([
             'creation_sarl_sarlau_snc_scs_sca',
             'creation_societe_anonyme_simplifiee_sas',
             'creation_societe_anonyme_sa',
@@ -28,8 +30,28 @@ class ManagerController extends Controller
             'representants',
             'associes',
             'commissaires'
-        ])->paginate(10);
-        return view('manager.dashboard', compact('annonces'));
+        ])->latest()->take(5)->get();
+        // return view('manager.dashboard', compact('annonces_en_attente'));
+
+        $annonces_traitees = Auth::guard('manager')->user()->annonces_legales()->with([
+            'creation_sarl_sarlau_snc_scs_sca',
+            'creation_societe_anonyme_simplifiee_sas',
+            'creation_societe_anonyme_sa',
+            'dissolution',
+            'cloture_liquidation',
+            'continuite_activite',
+            'transfert_siege_social',
+            'changement_objet_social',
+            'changement_denomination',
+            'transformation_forme_sociale',
+            'reduction_capital',
+            'augmentation_capital',
+            'representants',
+            'associes',
+            'commissaires'
+        ])->latest()->take(5)->get();
+        $total = Annonce_legale::where('statut' , '=', 'en attente de validation')->count();;
+        return view('manager.dashboard', compact('annonces_en_attente', 'annonces_traitees', 'total'));
     }
 
     public function create()
@@ -55,21 +77,41 @@ class ManagerController extends Controller
     }
 
 
-    public function edit(Manager $manager)
-    {
-        return view('manager.edit', compact('manager'));
-    }
-
-    public function update(Request $request, Manager $manager)
-    {
-        $manager->update($request->all());
-        return redirect()->route('manager.index')->with('success', 'Manager updated successfully');
+    public function edit(Request $request) {
+        return view('manager.profile', [
+            'manager' => $request->user('manager'),
+        ]);
     }
 
 
-    public function destroy(Manager $manager)
+    public function updateInfo(Request $request) {
+        $request->user('manager')->update($request->all());
+        // $request->user('manager')->fill($request->validated());
+        $request->user('manager')->save();
+        return redirect()->route('manager.profile.edit')->with('success', 'Votre profile est modifié avec succées');
+    }
+
+    public function updatePassword(Request $request)
     {
-        $manager->delete();
-        return redirect()->route('admin.index')->with('success', 'Admin deleted successfully');
+        $validated = $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $request->user('manager')->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+        return redirect()->route('manager.profile.edit')->with('success', 'Votre mot de passe est modifié avec succées');
+    }
+
+
+    public function logout(Request $request) {
+        Auth::guard('manager')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('manager.login.create');
     }
 }

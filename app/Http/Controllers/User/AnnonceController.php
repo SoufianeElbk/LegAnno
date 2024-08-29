@@ -532,6 +532,7 @@ class AnnonceController extends Controller
             'commissaires',
             'facture',
         ])->where('statut', 'validée')->paginate(10);
+        // dd($annonces);
         return view('user.profile.mes-annonces-publiees', compact('annonces'));
     }
 

@@ -19,15 +19,15 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'mohamed@gmail.com',
         //     'password' => bcrypt('mhd'),
         // ]);
-        // \App\Models\Admin::factory()->create([
-        //     'nom' => 'admin',
-        //     'email' => 'admin@gmail.com',
-        //     'password' => bcrypt('admin'),
-        // ]);
-        \App\Models\Manager::factory()->create([
-            'nom' => 'Omar Kabi',
-            'email' => 'manager@gmail.com',
-            'password' => bcrypt('manager'),
+        \App\Models\Admin::factory()->create([
+            'nom' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
         ]);
+        // \App\Models\Manager::factory()->create([
+        //     'nom' => 'Omar Kabi',
+        //     'email' => 'manager@gmail.com',
+        //     'password' => bcrypt('manager'),
+        // ]);
     }
 }

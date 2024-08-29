@@ -1,4 +1,4 @@
-<nav class="bg-indigo-700 p-4">
+<nav class="bg-indigo-700 p-4 mb-12">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset("/images/logo2.png") }}" class="h-8" alt="Logo" />
@@ -26,7 +26,7 @@
                         class="block py-2 px-3 rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">Commander un pack</a>
                 </li>
                 <li class="lg:hover:border-b-2 border-b-2 lg:border-0 w-full lg:w-fit ">
-                    <a href="{{route('login')}}"
+                    <a href="{{route('annonces-publiees.index')}}"
                         class="block py-2 px-3 rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">Annonces publiées</a>
                 </li>
                 @guest
@@ -58,19 +58,19 @@
                                     </div>
                                 </li>
                                 <li class="lg:hover:border-b-2 border-b-2 w-full">
-                                    <a href="{{route('profile.edit')}}" class="flex space-x-2 items-center py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
-                                    <svg class="text-black w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
-                                    <span>Mon profil</span>
-                                </a>
+                                    <a href="{{route('user.profile.edit')}}" class="flex space-x-2 items-center py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
+                                        <svg class="text-black w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                                        <span>Mon profil</span>
+                                    </a>
                                 </li>
                                 <li class="lg:hover:border-b-2 border-b-2 w-full">
-                                    <a href="{{route('accueil')}}" class="flex space-x-2 items-center  py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
+                                    <a href="{{route('mes-annonces-publiees.index')}}" class="flex space-x-2 items-center  py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-bookmark w-6 h-6"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 20V5a1 1 0 011-1h10a1 1 0 011 1v15l-6-3-6 3z"/></svg>
                                         <span>Mes annonces publiées</span>
                                 </a>
                                 </li>
                                 <li class="lg:hover:border-b-2 border-b-2 w-full">
-                                    <a href="{{route('accueil')}}" class="flex space-x-2 items-center  py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
+                                    <a href="{{route('packs-commandes')}}" class="flex space-x-2 items-center  py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
                                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 3H5.5L7.85836 13.4425C8.0643 14.3543 8.87398 15 9.8088 15H18.3957C19.3331 15 20.1447 14.3489 20.348 13.4339L22 6H6.5M11 20C11 20.5523 10.5523 21 10 21C9.44772 21 9 20.5523 9 20C9 19.4477 9.44772 19 10 19C10.5523 19 11 19.4477 11 20ZM19 20C19 20.5523 18.5523 21 18 21C17.4477 21 17 20.5523 17 20C17 19.4477 17.4477 19 18 19C18.5523 19 19 19.4477 19 20Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                                         <span>Packs commandés</span>
                                     </a>

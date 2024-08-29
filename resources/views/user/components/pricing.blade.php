@@ -13,17 +13,17 @@
             </p>
         </div>
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-            
+            @foreach ($packs as $pack)            
             <div class="bg-[#FFF7FC] rounded-lg shadow-lg p-6 relative overflow-hidden h-full">
 
                 <div class="mb-4">
-                    <h3 class="text-2xl font-semibold text-black border-b-4 border-indigo-400 w-fit">Pack Silver</h3>
+                    <h3 class="text-2xl font-semibold text-black border-b-4 border-indigo-400 w-fit">{{$pack->nom}}</h3>
                 </div>
                 <div class="mb-4">
-                    <img class="w-1/2 mx-auto" src="https://www.charika-eco.ma/mosaic_img/packs-illustration-1.png" alt="Pack Silver">
+                    <img class="w-1/2 mx-auto" src="{{asset('/images/packs/'.$pack->image)}}" alt="Pack Silver">
                 </div>
                 <div class="mb-4">
-                    <span class="text-4xl font-bold text-black">1300</span>
+                    <span class="text-4xl font-bold text-black">{{$pack->prix}}</span>
                     <span class="text-xl font-medium text-black">DH-TTC</span>
                 </div>
                 <ul class="mb-4 space-y-4 text-black">
@@ -31,13 +31,13 @@
                     <svg class="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>10 Annonces</span>
+                    <span>{{$pack->nombre_annonces}} Annonces</span>
                     </li>
                     <li class="flex items-center">
                     <svg class="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Prix unitaire : 130 DH-TTC</span>
+                    <span>Prix unitaire : {{$pack->prix / $pack->nombre_annonces}} DH-TTC</span>
                     </li>
                 </ul>
                 <a href="{{Route('packs.create')}}" class="flex justify-center space-x-2 w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700">
@@ -45,8 +45,8 @@
                     <span>Commander</span> 
                 </a>
             </div>
-            
-            <div class="bg-[#FFF7FC] rounded-lg shadow-lg p-6 relative overflow-hidden h-full">
+            @endforeach
+            {{-- <div class="bg-[#FFF7FC] rounded-lg shadow-lg p-6 relative overflow-hidden h-full">
 
                 <div class="mb-4">
                     <h3 class="text-2xl font-semibold text-black border-b-4 border-indigo-400 w-fit">Pack Gold</h3>
@@ -110,7 +110,7 @@
                     <span>Commander</span>
                 </a>
 
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

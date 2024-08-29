@@ -4,29 +4,31 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Manager;
+use App\Models\Pack;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AdminController extends Controller
 {
     public function dashboard() {
-        return view('admin.dashboard');
+        $users = User::latest('id')->take(5)->get();
+        $managers = Manager::latest()->take(5)->get();
+        $packs = Pack::latest('id')->take(5)->get();
+        $packs_chart = DB::table('packs')
+        ->join('commandes', 'packs.id', '=', 'commandes.pack_id')
+        ->select('packs.nom as pack_name', DB::raw('count(commandes.id) as total_bought'))
+        ->groupBy('packs.nom')
+        ->get();
+        return view('admin.dashboard', compact('users', 'managers', 'packs', 'packs_chart'));
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $admins = Admin::all();
-        return view('admin.index', compact('admins'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+    public function create() {
         return view('admin.login');
     }
 
@@ -44,37 +46,41 @@ class AdminController extends Controller
         else return back()->with('error','Email ou mot de passe sont incorrects');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
-    {
-        return view('admin.show', compact('admin'));
+    public function edit(Request $request) {
+        return view('admin.profile', [
+            'admin' => $request->user('admin'),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
-    {
-        return view('admin.edit', compact('admin'));
+    public function updateInfo(Request $request) {
+        // dd($request->all());
+        $request->user('admin')->update($request->all());
+        $request->user('admin')->save();
+        return redirect()->route('admin.profile.edit')->with('success', 'Votre profile est modifié avec succées');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Admin $admin)
+    public function updatePassword(Request $request)
     {
-        $admin->update($request->all());
-        return redirect()->route('admin.index')->with('success', 'Admin updated successfully');
+        
+        $validated = $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'confirmed'],
+        ]);
+        
+        $request->user('admin')->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return redirect()->route('admin.profile.edit')->with('success', 'Votre mot de passe est modifié avec succées');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
-    {
-        $admin->delete();
-        return redirect()->route('admin.index')->with('success', 'Admin deleted successfully');
+    public function logout(Request $request) {
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login.create');
     }
 }

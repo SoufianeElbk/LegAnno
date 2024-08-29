@@ -12,4 +12,8 @@ class Pack extends Model
     protected $fillable = [
         'nom', 'prix', 'description', 'nombre_annonces', 'image', 'active'
     ];
+    public function commandes()
+    {
+        return $this->hasMany(Commande::class);
+    }
 }

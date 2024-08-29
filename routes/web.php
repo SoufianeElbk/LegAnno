@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ManagerController as AdminManagerController;
+use App\Http\Controllers\Admin\PackController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\User\AnnonceController;
 use App\Http\Controllers\Manager\AnnonceController as ManagerAnnonceController;
 use App\Http\Controllers\User\CommandeController;
-use App\Http\Controllers\User\PackController;
 use App\Http\Controllers\User\PaiementController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +30,7 @@ Route::get('/', function () {
 });
 
 Route::get('/accueil', function () {
-    return view('user.home');
+    return view('user.home')->with('packs', App\Models\Pack::all());
 })->name('accueil');
 
 // Route::get('/dashboard', function () {
@@ -86,9 +88,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/annonces-legales-augmentation-capital', [AnnonceController::class, 'index_annonces_legales_augmentation_capital'])->name('annonces-legales-augmentation-capital');
     Route::post('/annonces-legales-augmentation-capital', [AnnonceController::class, 'store_annonces_legales_augmentation_capital'])->name('annonces-legales-augmentation-capital');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('user.profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('user.profile.destroy');
     Route::get('/packs-commandes', [CommandeController::class, 'index'])->name('packs-commandes');
 });
 
@@ -97,17 +99,55 @@ Route::middleware('auth')->group(function () {
 // ADMIN ROUTES ------------------------------------------------------------->
 
 Route::prefix('/admin')->group(function(){
-    Route::get('/login', [AdminController::class, 'create'])->name('admin.create');
-    Route::post('/login', [AdminController::class, 'store'])->name('admin.store');
 
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('admin');
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login', [AdminController::class, 'create'])->name('admin.login.create');
+        Route::post('/login', [AdminController::class, 'store'])->name('admin.login.store');
+    });
+    
+    Route::get('/', function () {
+        return redirect()->route('admin.dashboard');
+    });
+    
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+        Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+        Route::get('/managers', [AdminManagerController::class, 'index'])->name('admin.managers.index');
+        Route::get('/managers/create', [AdminManagerController::class, 'create'])->name('admin.managers.create');
+        Route::post('/managers', [AdminManagerController::class, 'store'])->name('admin.managers.store');
+        Route::get('/managers/{manager}/edit', [AdminManagerController::class, 'edit'])->name('admin.managers.edit');
+        Route::put('/managers/{manager}', [AdminManagerController::class, 'update'])->name('admin.managers.update');
+        Route::delete('/managers/{manager}', [AdminManagerController::class, 'destroy'])->name('admin.managers.destroy');
+
+        Route::get('/packs', [PackController::class, 'index'])->name('admin.packs.index');
+        Route::get('/packs/create', [PackController::class, 'create'])->name('admin.packs.create');
+        Route::post('/packs', [PackController::class, 'store'])->name('admin.packs.store');
+        Route::get('/packs/{pack}/edit', [PackController::class, 'edit'])->name('admin.packs.edit');
+        Route::put('/packs/{pack}', [PackController::class, 'update'])->name('admin.packs.update');
+        Route::delete('/packs/{pack}', [PackController::class, 'destroy'])->name('admin.packs.destroy');
+
+        Route::get('/profile', [AdminController::class, 'edit'])->name('admin.profile.edit');
+        Route::patch('/profile/info', [AdminController::class, 'updateInfo'])->name('admin.profile.updateInfo');
+        Route::patch('/profile/password', [AdminController::class, 'updatePassword'])->name('admin.profile.updatePassword');
+
+        // Route::resource('users', UserController::class);
+        Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+        // Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+        // Route::get('/users/ajouterUser', [UserController::class, 'create'])->name('admin.users.create');
+        // Route::post('/users/ajouterUser', [UserController::class, 'store'])->name('admin.users.store');
+        // Route::get('/users/editUser/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+        // Route::post('/users/editUser/{id}', [UserController::class, 'update'])->name('admin.users.update');
+    });
+
 });
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 // END ADMIN ROUTES ------------------------------------------------------------->
 
@@ -117,28 +157,32 @@ Route::prefix('/admin')->group(function(){
 
 // MANAGER ROUTES ------------------------------------------------------------->
 
-
 Route::prefix('/manager')->group(function(){
+
     Route::get('/', function () {
         return redirect()->route('manager.dashboard');
     });
-    Route::get('/dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard')->middleware('manager');
+
+    Route::middleware('manager')->group(function () {
+            Route::get('/dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
+        Route::get('/annonce-legale-{id}', [ManagerAnnonceController::class, 'create'])->name('manager.annonce-legale.create');
+        Route::post('/annonce-legale-{id}', [ManagerAnnonceController::class, 'approuver'])->name('manager.annonce-legale.approuver');
+        Route::patch('/annonce-legale-{id}', [ManagerAnnonceController::class, 'annuler'])->name('manager.annonce-legale.annuler');
+        // Route::patch('/manager/annonce-legale/{id}/approuver', [ManagerAnnonceController::class, 'approuver'])->name('manager.annonce-legale.approve');
+        Route::get('/annonces-traaitees', [ManagerAnnonceController::class, 'annonces_traitees'])->name('manager.annonces-traitees');
+        Route::get('/annonces-en-attente', [ManagerAnnonceController::class, 'annonces_en_attente'])->name('manager.annonces-en-attente');
+        Route::get('/profile', [ManagerController::class, 'edit'])->name('manager.profile.edit');
+        Route::patch('/profile/info', [ManagerController::class, 'updateInfo'])->name('manager.profile.updateInfo');
+        Route::patch('/profile/password', [ManagerController::class, 'updatePassword'])->name('manager.profile.updatePassword');
+
+        Route::post('/logout', [ManagerController::class, 'logout'])->name('manager.logout');
+    });
+
     Route::middleware('guest:manager')->group(function () {
         Route::get('/login', [ManagerController::class, 'create'])->name('manager.login.create');
         Route::post('/login', [ManagerController::class, 'store'])->name('manager.login.store');
     });
-    Route::get('/annonce-legale-{id}', [ManagerAnnonceController::class, 'create'])->name('manager.annonce-legale.create');
-    Route::patch('/annonce-legale-{id}', [ManagerAnnonceController::class, 'store'])->name('manager.annonce-legale.store');
 
-    Route::get('/annonces-traaitees', [ManagerAnnonceController::class, 'annonces_traitees'])->name('manager.annonces-traitees');
-});
-
-Route::prefix("manager")->group(function () {
-    // Route::middleware('auth')->group(function () {
-    //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // });
 });
 
 // END MANAGER ROUTES ------------------------------------------------------------->

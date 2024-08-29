@@ -36,7 +36,7 @@
         </div>
     </aside>
     <main class="w-full py-4 lg:w-3/4">
-        <form action="{{Route('profile.update')}}" method="POST">
+        <form action="{{Route('user.profile.update')}}" method="POST">
         @csrf
         @method('patch')
         <div class="p-2">

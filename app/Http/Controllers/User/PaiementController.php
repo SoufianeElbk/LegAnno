@@ -145,6 +145,8 @@ class PaiementController extends Controller
 
         $annonce->save();
 
+        Auth::user()->solde--;
+
         $facture = Facture::create([
             'user_id' => $request->user()->id,
             'annonce_legale_id' => $request->annonce_id,

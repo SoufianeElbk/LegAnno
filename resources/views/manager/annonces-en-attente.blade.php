@@ -31,7 +31,7 @@
                     <span class="mx-3 text-sm">Dashboard</span>
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="{{Route('manager.annonces-traitees')}}">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{Route('manager.annonces-traitees')}}">
                     <svg class="size-6" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -43,7 +43,7 @@
                     <span class="mx-3 text-sm">Annonces traitées</span>
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"
                     href="{{Route('manager.annonces-en-attente')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 
@@ -91,35 +91,19 @@
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="container mx-auto px-6 py-8">
-                    @session('message')
-                        <div class="bg-green-200 px-6 py-4 mx-2 mb-4 rounded-md text-lg flex items-center w-full">
-                            <svg viewBox="0 0 24 24" class="text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
-                                <path fill="currentColor"
-                                    d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
-                                </path>
-                            </svg>
-                            <span class="text-green-800">{{session('message')}}</span>
-                        </div>
-                    @endsession
-                    <h3 class="text-gray-700 text-3xl font-medium">Annonces traaitées</h3>
+                    <h3 class="text-gray-700 text-3xl font-medium">Annonces en attente</h3>
 
                     <div class="mt-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 -mx-6">
                             <div class="w-full px-6">
                                 <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white h-full">
-                                    <div class="p-3 rounded-full bg-indigo-500">
-                                        <svg class="size-8 text-white" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7.5 8L11.5001 22M18.6383 3.37924L21.9348 15.6583C22.2932 16.9933 21.1187 18.2381 19.762 17.961L17.0415 17.4054C14.014 16.787 10.8839 16.8807 7.89906 17.679C5.40053 18.3472 2.83037 16.8599 2.16089 14.3662C1.49142 11.8725 2.97216 9.30181 5.47068 8.63362C8.45556 7.83537 11.2132 6.35446 13.5253 4.30818L15.603 2.46935C16.6391 1.55235 18.2799 2.0442 18.6383 3.37924Z"
-                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round"></path>
-                                        </svg>
+                                    <div class="p-3 rounded-full bg-orange-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">{{Auth::guard('manager')->user()->annonces_legales()->count()}}</h4>
-                                        <div class="text-gray-500 text-sm">Annonces traaitées</div>
+                                        <h4 class="text-2xl font-semibold text-gray-700">{{$annonces->total()}}</h4>
+                                        <div class="text-gray-500 text-sm">Annonces en attente</div>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +124,7 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
-                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Décision</th>
+                                            {{-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th> --}}
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
                                     </thead>
@@ -196,16 +180,9 @@
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce->type_annonce}}</div>
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                                    @if($annonce->statut == 'validée')
-                                                        bg-green-100 text-green-800
-                                                    @elseif($annonce->statut == 'annulée')
-                                                        bg-red-100 text-red-800
-                                                    @endif">
-                                                    {{ucfirst($annonce->statut)}}
-                                                </span>
-                                            </td>
+                                            {{-- <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                            </td> --}}
 
                                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                                 <a href="{{Route('manager.annonce-legale.create', $annonce->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">
@@ -215,9 +192,6 @@
                                             </td>
                                         </tr>
                                         @empty
-                                        <tr>
-                                            <td colspan="6">Sans</td>
-                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
