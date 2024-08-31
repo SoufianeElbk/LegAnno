@@ -50,8 +50,8 @@ class ManagerController extends Controller
             'associes',
             'commissaires'
         ])->latest()->take(5)->get();
-        $total = Annonce_legale::where('statut' , '=', 'en attente de validation')->count();;
-        return view('manager.dashboard', compact('annonces_en_attente', 'annonces_traitees', 'total'));
+
+        return view('manager.dashboard', compact('annonces_en_attente', 'annonces_traitees'));
     }
 
     public function create()

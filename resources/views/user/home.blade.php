@@ -135,7 +135,7 @@
         @include('user.components.pricing')
     </div>
     {{-- </div> --}}
-    <div class="bg-white">
+    <div class="">
         @include('user.components.footer')
     </div>
 

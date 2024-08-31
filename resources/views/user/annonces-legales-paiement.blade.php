@@ -30,7 +30,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                     <div class="w-fit mx-auto text-white text-xl font-bold mb-4">1- Saisie des informations</div>
-                    <div class="text-xs md:text-sm space-y-3 bg-white py-4 px-8 rounded-2xl">
+                    <div class="text-xs md:text-sm space-y-3 bg-white py-4 px-8 rounded-md">
                         <h1 class="text-lg font-bold mb-4">Votre annonce légale n° {{$Data['annonce']->id}}</h1>
                         @if($Data['type_annonce']==1)
                             <p class="text-center">{{$Data['creation_sarl']->denomination}} ({{$Data['creation_sarl']->sigle}}) {{$Data['creation_sarl']->forme_sociale}}</p>
@@ -305,7 +305,7 @@
                 @csrf
                 {{-- <div class="text-black"> --}}
                     <div class="w-fit mx-auto text-white text-xl font-bold mb-4">2- Paiement de l'annonce</div>
-                    <div class="bg-white p-4 rounded-2xl">
+                    <div class="bg-white p-4 rounded-md">
                         <h1 class="text-lg mb-4 font-semibold">Choisissez un moyen de paiement ci-dessous :</h1>
                             <div class="flex flex-col space-y-4 mb-4">
                                 <input type="hidden" name="annonce_id" value="{{$Data['annonce']->id}}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Commande;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -27,6 +28,18 @@ class CommandeController extends Controller
             'mode_paiement' => $request->mode_paiement,
         ]);
         Auth::user()->increment('solde', 10);
-        return redirect()->route('packs.create')->with('success', 'Commande has been created');
+
+        $pdf = Pdf::loadView('pdf.commande', [
+            'commande' => Commande::find($commande->id),
+            'imagePath' => public_path('/images/logo1.png')
+        ]);
+
+        $fileName = 'commande_' . $commande->id . '.pdf';
+        $filePath = public_path('commandes/' . $fileName);
+
+        $pdf->save($filePath);
+
+
+        return redirect()->route('packs.create')->with('success', 'La commande est passée avec succées');
     }
 }

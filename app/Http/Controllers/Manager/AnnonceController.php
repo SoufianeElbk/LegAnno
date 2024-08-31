@@ -283,80 +283,81 @@ class AnnonceController extends Controller
     // }
 
     public function approuver($id, Request $request) {
-    $annonce = Annonce_legale::find($id);
+        $annonce = Annonce_legale::find($id);
 
-    $annonce->statut = 'validée';
-    $annonce->manager_id = Auth::guard('manager')->id();
-    $annonce->date_validation = now();
-    $annonce->date_publication = now();
-    $annonce->save();
+        $annonce->statut = 'validée';
+        $annonce->manager_id = Auth::guard('manager')->id();
+        $annonce->date_validation = now();
+        $annonce->date_publication = now();
+        
+        $annonce->save();
 
-    $data = ['annonce' => $annonce, 'type_annonce' => $annonce->num_type];
+        $data = ['annonce' => $annonce, 'type_annonce' => $annonce->num_type];
 
-    switch ($annonce->num_type) {
-        case 1:
-            $data['creation_sarl'] = $annonce->creation_sarl_sarlau_snc_scs_sca()->first();
-            $data['representants'] = $annonce->representants()->get();
-            $data['associes'] = $annonce->associes()->get();
-            $data['commissaires'] = $annonce->commissaires()->get()->count() != 0 ? $annonce->commissaires()->get() : null;
-            break;
-        case 2:
-            $data['creation_sas'] = $annonce->creation_societe_anonyme_simplifiee_sas()->first();
-            $data['representants'] = $annonce->representants()->get();
-            $data['membres'] = $annonce->membres_organe_administration()->get();
-            $data['commissaires'] = $annonce->commissaires()->get()->count() != 0 ? $annonce->commissaires()->get() : null;
-            break;
-        case 3:
-            $data['creation_sa'] = $annonce->creation_societe_anonyme_sa()->first();
-            $data['representants'] = $annonce->representants()->get();
-            $data['membres'] = $annonce->membres_organe_administration()->get();
-            $data['commissaires'] = $annonce->commissaires()->get()->count() != 0 ? $annonce->commissaires()->get() : null;
-            break;
-        case 4:
-            $data['dissolution'] = $annonce->dissolution()->first();
-            break;
-        case 5:
-            $data['cloture_liquidation'] = $annonce->cloture_liquidation()->first();
-            break;
-        case 6:
-            $data['continuite_activite'] = $annonce->continuite_activite()->first();
-            break;
-        case 7:
-            $data['transfert_siege_social'] = $annonce->transfert_siege_social()->first();
-            break;
-        case 8:
-            $data['changement_objet_social'] = $annonce->changement_objet_social()->first();
-            break;
-        case 9:
-            $data['changement_denomination'] = $annonce->changement_denomination()->first();
-            break;
-        case 10:
-            $data['transformation_forme_sociale'] = $annonce->transformation_forme_sociale()->first();
-            $data['representants'] = $annonce->representants()->get();
-            break;
-        case 11:
-            $data['reduction_capital'] = $annonce->reduction_capital()->first();
-            break;
-        case 12:
-            $data['augmentation_capital'] = $annonce->augmentation_capital()->first();
-            break;
+        switch ($annonce->num_type) {
+            case 1:
+                $data['creation_sarl'] = $annonce->creation_sarl_sarlau_snc_scs_sca()->first();
+                $data['representants'] = $annonce->representants()->get();
+                $data['associes'] = $annonce->associes()->get();
+                $data['commissaires'] = $annonce->commissaires()->get()->count() != 0 ? $annonce->commissaires()->get() : null;
+                break;
+            case 2:
+                $data['creation_sas'] = $annonce->creation_societe_anonyme_simplifiee_sas()->first();
+                $data['representants'] = $annonce->representants()->get();
+                $data['membres'] = $annonce->membres_organe_administration()->get();
+                $data['commissaires'] = $annonce->commissaires()->get()->count() != 0 ? $annonce->commissaires()->get() : null;
+                break;
+            case 3:
+                $data['creation_sa'] = $annonce->creation_societe_anonyme_sa()->first();
+                $data['representants'] = $annonce->representants()->get();
+                $data['membres'] = $annonce->membres_organe_administration()->get();
+                $data['commissaires'] = $annonce->commissaires()->get()->count() != 0 ? $annonce->commissaires()->get() : null;
+                break;
+            case 4:
+                $data['dissolution'] = $annonce->dissolution()->first();
+                break;
+            case 5:
+                $data['cloture_liquidation'] = $annonce->cloture_liquidation()->first();
+                break;
+            case 6:
+                $data['continuite_activite'] = $annonce->continuite_activite()->first();
+                break;
+            case 7:
+                $data['transfert_siege_social'] = $annonce->transfert_siege_social()->first();
+                break;
+            case 8:
+                $data['changement_objet_social'] = $annonce->changement_objet_social()->first();
+                break;
+            case 9:
+                $data['changement_denomination'] = $annonce->changement_denomination()->first();
+                break;
+            case 10:
+                $data['transformation_forme_sociale'] = $annonce->transformation_forme_sociale()->first();
+                $data['representants'] = $annonce->representants()->get();
+                break;
+            case 11:
+                $data['reduction_capital'] = $annonce->reduction_capital()->first();
+                break;
+            case 12:
+                $data['augmentation_capital'] = $annonce->augmentation_capital()->first();
+                break;
+        }
+
+        $pdf = Pdf::loadView('pdf.annonce', $data);
+
+        // Define the file path
+        $fileName = 'annonce_' . $annonce->id . '.pdf';
+        $filePath = public_path('annonces/' . $fileName);
+
+        // Save the PDF to the specified directory
+        $pdf->save($filePath);
+
+        // Return the PDF as a download
+        // return $pdf->download('annonce.pdf');
+
+        // Alternatively, redirect to the manager dashboard
+        return redirect()->route('manager.annonces-traitees')->with('message', 'L\'annonce légale '.$id.' est approuvée');
     }
-
-    $pdf = Pdf::loadView('pdf.annonce', $data);
-
-    // Define the file path
-    $fileName = 'annonce_' . $annonce->id . '.pdf';
-    $filePath = public_path('annonces/' . $fileName);
-
-    // Save the PDF to the specified directory
-    $pdf->save($filePath);
-
-    // Return the PDF as a download
-    // return $pdf->download('annonce.pdf');
-
-    // Alternatively, redirect to the manager dashboard
-    return redirect()->route('manager.annonces-traitees')->with('message', 'L\'annonce légale '.$id.' est approuvée');
-}
 
 
 
@@ -385,9 +386,6 @@ class AnnonceController extends Controller
             'transformation_forme_sociale',
             'reduction_capital',
             'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires'
         ])->paginate(10);
         return view('manager.annonces-traitees', compact('annonces'));
     }
@@ -406,9 +404,6 @@ class AnnonceController extends Controller
             'transformation_forme_sociale',
             'reduction_capital',
             'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires'
         ])->paginate(10);
         return view('manager.annonces-en-attente', compact('annonces'));
     }

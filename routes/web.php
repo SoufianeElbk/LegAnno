@@ -104,11 +104,11 @@ Route::prefix('/admin')->group(function(){
         Route::get('/login', [AdminController::class, 'create'])->name('admin.login.create');
         Route::post('/login', [AdminController::class, 'store'])->name('admin.login.store');
     });
-    
+
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     });
-    
+
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -132,6 +132,14 @@ Route::prefix('/admin')->group(function(){
         Route::get('/packs/{pack}/edit', [PackController::class, 'edit'])->name('admin.packs.edit');
         Route::put('/packs/{pack}', [PackController::class, 'update'])->name('admin.packs.update');
         Route::delete('/packs/{pack}', [PackController::class, 'destroy'])->name('admin.packs.destroy');
+
+        Route::get('/commandes', [\App\Http\Controllers\Admin\CommandeController::class, 'index'])->name('admin.commandes.index');
+        Route::get('/annonces-legales-validees', [\App\Http\Controllers\Admin\AnnonceController::class, 'annonces_validees'])->name('admin.annonces-validees.index');
+        Route::get('/annonces-legales-annulees', [\App\Http\Controllers\Admin\AnnonceController::class, 'annonces_annulees'])->name('admin.annonces-annulees.index');
+        Route::get('/annonces-legales-en-attente', [\App\Http\Controllers\Admin\AnnonceController::class, 'annonces_en_attente'])->name('admin.annonces-en-attente.index');
+        Route::get('/annonces-legales-en-preparation', [\App\Http\Controllers\Admin\AnnonceController::class, 'annonces_en_preparation'])->name('admin.annonces-en-preparation.index');
+
+        Route::get('/annonce-legale-{id}', [\App\Http\Controllers\Admin\AnnonceController::class, 'index'])->name('admin.annonce-legale.index');
 
         Route::get('/profile', [AdminController::class, 'edit'])->name('admin.profile.edit');
         Route::patch('/profile/info', [AdminController::class, 'updateInfo'])->name('admin.profile.updateInfo');

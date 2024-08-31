@@ -26,15 +26,15 @@ class PackController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
             'prix' => 'required|numeric|min:0',
-            'nombre_annonces' => 'required|integer|min:0', 
+            'nombre_annonces' => 'required|integer|min:0',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
         ]);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $timestamp = now()->format('YmdHis'); 
+            $timestamp = now()->format('YmdHis');
             $imageExtension = $image->getClientOriginalExtension();
-            $imageName = $timestamp . '.' . $imageExtension; 
+            $imageName = $timestamp . '.' . $imageExtension;
             $image->move(public_path('images/packs'), $imageName);
             $validatedData['image'] = $imageName;
         }
@@ -66,7 +66,7 @@ class PackController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
             'prix' => 'required|numeric|min:0',
-            'nombre_annonces' => 'required|integer|min:0', 
+            'nombre_annonces' => 'required|integer|min:0',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg',
         ]);
 
@@ -74,7 +74,7 @@ class PackController extends Controller
             if ($pack->image && file_exists(public_path('images/packs/' . $pack->image))) {
                 unlink(public_path('images/packs/' . $pack->image));
             }
-    
+
             $image = $request->file('image');
             $timestamp = now()->format('YmdHis'); // Generate a timestamp
             $imageName = $timestamp . '.' . $image->getClientOriginalExtension();

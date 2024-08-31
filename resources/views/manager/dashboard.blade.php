@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">{{$total}}</h4>
+                                        <h4 class="text-2xl font-semibold text-gray-700">{{App\Models\Annonce_legale::where('statut', '=', 'en attente de validation')->count()}}</h4>
                                         <div class="text-gray-500 text-sm">Annonces en attente</div>
                                     </div>
                                 </div>

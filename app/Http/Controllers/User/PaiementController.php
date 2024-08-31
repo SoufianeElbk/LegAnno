@@ -137,22 +137,24 @@ class PaiementController extends Controller
         }
         else return redirect('/');
     }
-
     public function store_annonces_legales_paiement(Request $request){
         $annonce = Annonce_legale::find($request->annonce_id);
 
         $annonce->statut = 'en attente de validation';
+        $annonce->date_paiement = now();
+        $annonce->paiement = 1;
 
         $annonce->save();
 
-        Auth::user()->solde--;
+        if($request->mode_paiement == 'solde')
+            $request->user()->decrement('solde');
 
         $facture = Facture::create([
             'user_id' => $request->user()->id,
             'annonce_legale_id' => $request->annonce_id,
             'mode_paiement' => $request->mode_paiement,
             'adresse_facturation' => $request->adresse_facturation,
-            'montant' => 150,
+            'montant' => $request->mode_paiement != 'solde' ? 150 : null,
         ]);
         return redirect()->back();
     }

@@ -62,6 +62,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_constitution_sarl_sarlau_snc_scs_sca(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Constitution d\'une '.$request->forme_sociale,
             'num_type' => 1,
             'tribunal' => $request->tribunal,
@@ -105,6 +106,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_constitution_sas(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Constitution d\'une Société Anonyme Simplifiée',
             'num_type' => 2,
             'tribunal' => $request->tribunal,
@@ -154,6 +156,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_constitution_sa(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Constitution d\'une Société Anonyme',
             'num_type' => 3,
             'tribunal' => $request->tribunal,
@@ -203,6 +206,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_dissolution(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Dissolution',
             'num_type' => 4,
             'tribunal' => $request->tribunal,
@@ -239,6 +243,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_cloture_de_la_liquidation(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Clôture de la liquidation',
             'num_type' => 5,
             'tribunal' => $request->tribunal,
@@ -272,6 +277,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_continuite_activite(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Continuité de l\'activité',
             'num_type' => 6,
             'tribunal' => $request->tribunal,
@@ -297,6 +303,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_transfert_siege_social(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Transfert de siège social',
             'num_type' => 7,
             'tribunal' => $request->tribunal,
@@ -326,6 +333,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_changement_objet_social(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Changement d\'objet social',
             'num_type' => 8,
             'tribunal' => $request->tribunal,
@@ -354,6 +362,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_changement_denomination(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Changement de dénomination',
             'num_type' => 9,
             'tribunal' => $request->tribunal,
@@ -381,6 +390,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_transformation_forme_sociale(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Transformation de la forme sociale',
             'num_type' => 10,
             'tribunal' => $request->tribunal,
@@ -412,6 +422,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_reduction_capital(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Réduction de capital',
             'num_type' => 11,
             'tribunal' => $request->tribunal,
@@ -442,6 +453,7 @@ class AnnonceController extends Controller
     public function store_annonces_legales_augmentation_capital(Request $request) {
         $annonce = Annonce_legale::create([
             'user_id' => Auth::user()->id,
+            'date_creation' => now(),
             'type_annonce' => 'Augmentation de capital',
             'num_type' => 12,
             'tribunal' => $request->tribunal,
@@ -486,9 +498,6 @@ class AnnonceController extends Controller
             'transformation_forme_sociale',
             'reduction_capital',
             'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires'
         ])->paginate(10);
         return view('user.mes-annonces', compact('annonces'));
     }
@@ -506,9 +515,6 @@ class AnnonceController extends Controller
             'transformation_forme_sociale',
             'reduction_capital',
             'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires'
         ])->paginate(10);
             // dd($annonces);
         return view('user.annonces-legales-publiees', compact('annonces'));
@@ -527,9 +533,6 @@ class AnnonceController extends Controller
             'transformation_forme_sociale',
             'reduction_capital',
             'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires',
             'facture',
         ])->where('statut', 'validée')->paginate(10);
         // dd($annonces);

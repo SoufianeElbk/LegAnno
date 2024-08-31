@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('date_commande');
             $table->string('mode_paiement');
             $table->string('adresse_facturation');
-            $table->integer('montant');
+            $table->integer('montant')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
             $table->timestamps();

@@ -35,7 +35,7 @@
                     @endif
                     sur
                     <span class="font-medium">{{ $paginator->total() }}</span>
-                    annonces légales trouvées
+                    {{preg_split('/\//',$paginator->path())[count(preg_split('/\//',$paginator->path())) - 1]}} trouvées
                 </p>
             </div>
 
