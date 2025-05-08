@@ -30,12 +30,11 @@ return new class extends Migration
             $table->boolean('paiement')->default(0);
             $table->timestamps();
             // Foreign key constraints
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('manager_id')->references('id')->on('managers');
-            $table->foreign('journal_id')->references('id')->on('journaux');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('manager_id')->references('id')->on('managers')->cascadeOnDelete();
+            $table->foreign('journal_id')->references('id')->on('journaux')->cascadeOnDelete();
         });
     }
-
     /**
      * Reverse the migrations.
      */

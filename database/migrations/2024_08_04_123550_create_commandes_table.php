@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('date_commande');
             $table->string('adresse_facturation');
             $table->string('mode_paiement');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('pack_id')->references('id')->on('packs');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('pack_id')->references('id')->on('packs')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('annonce_legale_id');
-            $table->timestamp('date_commande');
+            $table->timestamp('date');
             $table->string('mode_paiement');
             $table->string('adresse_facturation');
             $table->integer('montant')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('annonce_legale_id')->references('id')->on('annonces_legales')->cascadeOnDelete();
             $table->timestamps();
         });
     }
