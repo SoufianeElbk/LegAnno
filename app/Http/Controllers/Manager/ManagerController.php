@@ -14,42 +14,10 @@ use Illuminate\Validation\Rules\Password;
 class ManagerController extends Controller
 {
     public function dashboard() {
-        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires'
-        ])->latest()->take(5)->get();
+        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->latest()->take(5)->get();
         // return view('manager.dashboard', compact('annonces_en_attente'));
 
-        $annonces_traitees = Auth::guard('manager')->user()->annonces_legales()->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-            'representants',
-            'associes',
-            'commissaires'
-        ])->latest()->take(5)->get();
+        $annonces_traitees = Auth::guard('manager')->user()->annonces_legales()->latest()->take(5)->get();
 
         return view('manager.dashboard', compact('annonces_en_attente', 'annonces_traitees'));
     }

@@ -359,13 +359,12 @@ class AnnonceController extends Controller
         return redirect()->route('manager.annonces-traitees')->with('message', 'L\'annonce légale '.$id.' est approuvée');
     }
 
-
-
     public function annuler($id, Request $request){
         $annonce = Annonce_legale::find($id);
 
         $annonce->statut = 'annulée';
         $annonce->manager_id = Auth::guard('manager')->id();
+        $annonce->date_validation = now();
 
         $annonce->save();
 
@@ -373,38 +372,12 @@ class AnnonceController extends Controller
     }
 
     public function annonces_traitees(){
-        $annonces = Auth::guard('manager')->user()->annonces_legales()->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces = Auth::guard('manager')->user()->annonces_legales()->paginate(10);
         return view('manager.annonces-traitees', compact('annonces'));
     }
 
     public function annonces_en_attente() {
-        $annonces = Annonce_legale::where('statut' , '=', 'en attente de validation')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces = Annonce_legale::where('statut' , '=', 'en attente de validation')->paginate(10);
         return view('manager.annonces-en-attente', compact('annonces'));
     }
 }
