@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Annonce_legale;
 use Illuminate\Http\Request;
 use Auth;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AnnonceController extends Controller
@@ -485,57 +486,15 @@ class AnnonceController extends Controller
     }
 
     public function index(Request $request) {
-        $annonces = Auth::user()->annonces_legales()->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces = Auth::user()->annonces_legales()->latest()->paginate(10);
         return view('user.mes-annonces', compact('annonces'));
     }
     public function index_annonces_publiees(Request $request) {
-        $annonces = Annonce_legale::with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
-            // dd($annonces);
+        $annonces = Annonce_legale::where('statut', 'validée')->paginate(10);
         return view('user.annonces-legales-publiees', compact('annonces'));
     }
     public function index_mes_annonces_publiees(Request $request) {
-        $annonces = Auth::user()->annonces_legales()->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-            'facture',
-        ])->where('statut', 'validée')->paginate(10);
-        // dd($annonces);
+        $annonces = Auth::user()->annonces_legales()->where('statut', 'validée')->paginate(10);
         return view('user.profile.mes-annonces-publiees', compact('annonces'));
     }
 

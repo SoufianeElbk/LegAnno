@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class PaiementController extends Controller
 {
+    
     public function index_annonces_legales_paiement($id){
         $annonce = Annonce_legale::find($id);
         if($annonce){
@@ -135,8 +136,9 @@ class PaiementController extends Controller
             }
             else return redirect('/');
         }
-        else return redirect('/');
+        else return back();
     }
+
     public function store_annonces_legales_paiement(Request $request){
         $annonce = Annonce_legale::find($request->annonce_id);
 
@@ -146,7 +148,7 @@ class PaiementController extends Controller
 
         $annonce->save();
 
-        if($request->mode_paiement == 'solde')
+        if($request->mode_paiement == 'Solde')
             $request->user()->decrement('solde');
 
         $facture = Facture::create([
@@ -154,8 +156,9 @@ class PaiementController extends Controller
             'annonce_legale_id' => $request->annonce_id,
             'mode_paiement' => $request->mode_paiement,
             'adresse_facturation' => $request->adresse_facturation,
-            'montant' => $request->mode_paiement != 'solde' ? 150 : null,
+            'montant' => $request->mode_paiement != 'Solde' ? 150 : null,
         ]);
-        return redirect()->back();
+
+        return redirect()->route('mes-annonces.index')->with('success', 'L\'annonce '.$request->annonce_id.' est payée avec succées');
     }
 }
