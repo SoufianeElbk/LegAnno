@@ -9,75 +9,23 @@ class AnnonceController extends Controller
 {
     public function annonces_validees()
     {
-        $annonces_validees = Annonce_legale::where('statut' , '=', 'validée')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces_validees = Annonce_legale::where('statut' , '=', 'validée')->paginate(10);
         return view('admin.annonces-validees.index', compact('annonces_validees'));
     }
 
     public function annonces_annulees()
     {
-        $annonces_annulees = Annonce_legale::where('statut' , '=', 'annulée')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces_annulees = Annonce_legale::where('statut' , '=', 'annulée')->paginate(10);
         return view('admin.annonces-annulees.index', compact('annonces_annulees'));
     }
 
     public function annonces_en_attente() {
-        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->paginate(10);
         return view('admin.annonces-en-attente.index', compact('annonces_en_attente'));
     }
 
     public function annonces_en_preparation() {
-        $annonces_en_preparation = Annonce_legale::where('statut' , '=', 'en préparation')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->paginate(10);
+        $annonces_en_preparation = Annonce_legale::where('statut' , '=', 'en préparation')->paginate(10);
         return view('admin.annonces-en-preparation.index', compact('annonces_en_preparation'));
     }
 

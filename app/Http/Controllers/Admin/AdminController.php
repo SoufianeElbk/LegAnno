@@ -30,69 +30,30 @@ class AdminController extends Controller
         ->groupBy('packs.nom')
         ->get();
 
-        $commandes = Commande::with(['pack', 'user'])->latest('id')->take(5)->get();
+        $annonces_chart = DB::table('annonces_legales')
+        ->select(DB::raw('DATE(date_validation) as date'), DB::raw('count(*) as total'))
+        ->where('statut', '=', 'validée')
+        ->groupBy('date')
+        ->get();
 
-        $annonces_en_preparation = Annonce_legale::where('statut' , '=', 'en préparation')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->latest()->take(5)->get();
+        $annoncesByCategory = DB::table('annonces_legales')
+        ->select('type_annonce', DB::raw('count(*) as total'))
+        ->where('statut', '=', 'validée')
+        ->groupBy('type_annonce')
+        ->get();
 
-        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->latest()->take(5)->get();
 
-        $annonces_validees = Annonce_legale::where('statut' , '=', 'validée')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->latest()->take(5)->get();
+        $commandes = Commande::latest('id')->take(5)->get();
 
-        $annonces_annulees = Annonce_legale::where('statut' , '=', 'annulée')->with([
-            'creation_sarl_sarlau_snc_scs_sca',
-            'creation_societe_anonyme_simplifiee_sas',
-            'creation_societe_anonyme_sa',
-            'dissolution',
-            'cloture_liquidation',
-            'continuite_activite',
-            'transfert_siege_social',
-            'changement_objet_social',
-            'changement_denomination',
-            'transformation_forme_sociale',
-            'reduction_capital',
-            'augmentation_capital',
-        ])->latest()->take(5)->get();
+        $annonces_en_preparation = Annonce_legale::where('statut' , '=', 'en préparation')->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('users', 'managers', 'packs', 'packs_chart', 'commandes', 'annonces_en_preparation', 'annonces_en_attente', 'annonces_validees', 'annonces_annulees'));
+        $annonces_en_attente = Annonce_legale::where('statut' , '=', 'en attente de validation')->latest()->take(5)->get();
+
+        $annonces_validees = Annonce_legale::where('statut' , '=', 'validée')->latest()->take(5)->get();
+
+        $annonces_annulees = Annonce_legale::where('statut' , '=', 'annulée')->latest()->take(5)->get();
+
+        return view('admin.dashboard', compact('users', 'managers', 'packs', 'packs_chart', 'annonces_chart', 'annoncesByCategory', 'commandes', 'annonces_en_preparation', 'annonces_en_attente', 'annonces_validees', 'annonces_annulees'));
     }
 
 
