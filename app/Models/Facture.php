@@ -10,7 +10,7 @@ class Facture extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'annonce_legale_id', 'date_commande',
+        'user_id', 'annonce_legale_id', 'date',
         'mode_paiement', 'adresse_facturation', 'montant'
     ];
 
