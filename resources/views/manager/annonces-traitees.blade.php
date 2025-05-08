@@ -138,6 +138,7 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date création</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date validation</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Décision</th>
@@ -160,6 +161,10 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce->date_paiement}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce->date_validation}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">

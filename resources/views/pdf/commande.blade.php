@@ -1,47 +1,73 @@
-<div style="text-align: center;">
-    <img src="{{ $imagePath }}" alt="" style="width: 400px; margin: 50px auto;">
-</div>
-    <table class="min-w-full" border="1" width="100%">
-    <thead>
-        <tr>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pack commandé</th>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date de la commande</th>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Montant (DH)</th>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Mode paiement</th>
-        </tr>
-    </thead>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-width: 300px;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details h3 {
+            margin: 5px 0;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table, .table th, .table td {
+            border: 1px solid black;
+        }
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ $imagePath }}" alt="Logo">
+        <h1>Confirmation de la commande</h1>
+    </div>
+    
+    <div class="details">
+        <h3>ID du client: {{ $commande->user->id }}</h3>
+        <h3>Nom du client: {{ $commande->user->nom }}</h3>
+        <h3>Email: {{ $commande->user->email }}</h3>
+        <h3>Date: {{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</h3>
+    </div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pack</th>
+                <th>Nombre d'annonces</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ $commande->pack->nom }}</td>
+                <td>{{ $commande->pack->nombre_annonces }}</td>
+                <td>{{ $commande->pack->prix }} DH</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <tbody class="bg-white">
-        <tr>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">{{$commande->id}}</div>
-                </div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-sm leading-5 text-gray-900">{{$commande->user->nom}}</div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-sm leading-5 text-gray-900">{{$commande->pack->nom}}</div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-sm leading-5 text-gray-900">{{$commande->date_commande}}</div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-sm leading-5 text-gray-900">{{$commande->pack->prix}}</div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-sm leading-5 text-gray-900">{{$commande->mode_paiement}}</div>
-            </td>
-
-        </tr>
-
-    </tbody>
-</table>
+    <div class="footer">
+        <h3>Total: {{ $commande->pack->prix }} DH TTC</h3>
+        <h3>Mode de paiement: {{$commande->mode_paiement}} </h3>
+        <h3>Adresse de facturation: {{$commande->adresse_facturation}} </h3>
+    </div>
+</body>
+</html>

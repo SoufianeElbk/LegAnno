@@ -16,7 +16,7 @@
         @csrf
             <div class="w-full lg:w-3/4 mx-auto text-sm">
 
-                <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
+                <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-md border-2 border-black">
                     <h1 class="text-xl font-bold border-b-4 border-black w-fit">La décision</h1>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
                         <div>
@@ -33,12 +33,12 @@
                         </div>
                         <div>
                             <label class="block my-2" for="">Date de décision</label>
-                            <input name="date_decision" type="date" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
+                            <input required name="date_decision" type="date" class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-2">
                         </div>
                     </div>
                 </div>
 
-                <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-lg border-2 border-black">
+                <div class="mb-4 grid grid-cols-1 bg-white text-black p-8 rounded-md border-2 border-black">
                     <h1 class="text-xl font-bold border-b-4 border-black w-fit">La société</h1>
                     <div class="grid grid-cols-1 gap-x-12">
                         <div>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
+                <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-md border-2 border-black">
                     <h1 class="text-xl font-bold border-b-4 border-black w-fit">Nouvelle adresse du siège social</h1>
                     <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
                         <div class=" lg:col-span-2">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-lg border-2 border-black">
+                <div class="mb-4 grid grid-cols-1  bg-white text-black p-8 rounded-md border-2 border-black">
                     <h1 class="text-xl font-bold w-fit border-b-4 border-black">Dépôt légal</h1>
                     <div class="grid grid-cols-1 gap-x-8">
                         <div>

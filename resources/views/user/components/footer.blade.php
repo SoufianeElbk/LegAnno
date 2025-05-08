@@ -69,20 +69,23 @@
                 {{-- <p class="font-medium text-gray-900">Liens</p> --}}
                 <ul class="mt-6 space-y-4 text-sm">
                     <li>
-                        <a href="#" class=" transition hover:opacity-75"> Accueil </a>
+                        <a href="{{Route('accueil')}}" class=" transition hover:opacity-75"> Accueil </a>
                     </li>
                     <li>
-                        <a href="#" class=" transition hover:opacity-75"> Annonces Légales </a>
+                        <a href="{{Route('annonces-publiees.index')}}" class=" transition hover:opacity-75"> Annonces Légales </a>
                     </li>
                     {{-- <li>
                         <a href="#" class=" transition hover:opacity-75"> Nous contacter </a>
                     </li> --}}
+                    @guest
+
                     <li>
-                        <a href="#" class=" transition hover:opacity-75"> Se connecter </a>
+                        <a href="{{Route('login')}}" class=" transition hover:opacity-75"> Se connecter </a>
                     </li>
                     <li>
-                        <a href="#" class=" transition hover:opacity-75"> S'inscrire </a>
+                        <a href="{{Route('register')}}" class="transition hover:opacity-75"> S'inscrire </a>
                     </li>
+                    @endguest
                 </ul>
             </div>
 

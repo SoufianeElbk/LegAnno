@@ -1,3 +1,13 @@
+@php
+    $categories = [];
+    $totals = [];
+
+    foreach ($annoncesByCategory as $category) {
+        $categories[] = $category->type_annonce;
+        $totals[] = $category->total;
+}
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +19,16 @@
 
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    title
 </head>
 
 <body class="font-[Poppins]">
-    <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+    <div id="loading-dots" class="flex space-x-2 justify-center items-center bg-white h-screen dark:invert">
+        <span class="sr-only">Loading...</span>
+        <div class="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div class="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div class="h-8 w-8 bg-black rounded-full animate-bounce"></div>
+    </div>
+    <div id="dashboard-content" x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
         <div x-cloak :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
             class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
 
@@ -135,11 +150,14 @@
                         <div x-cloak x-show="dropdownOpen"
                             class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl">
                             <a href="{{Route('admin.profile.edit')}}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
+                                class="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                                <span>Profile</span>
+                            </a>
                             <form method="POST" action="{{ route('admin.logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
                                 @csrf
                                 <button type="submit" class="w-full text-left flex items-center space-x-2">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 17V18C12 19.6569 10.6569 21 9 21H6C4.34315 21 3 19.6569 3 18V6C3 4.34315 4.34315 3 6 3H9C10.6569 3 12 4.34315 12 6V7M17 8L21 12L17 16M9 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    <svg class="size-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 17V18C12 19.6569 10.6569 21 9 21H6C4.34315 21 3 19.6569 3 18V6C3 4.34315 4.34315 3 6 3H9C10.6569 3 12 4.34315 12 6V7M17 8L21 12L17 16M9 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                                     <span>Logout</span>
                                 </button>
                             </form>
@@ -296,14 +314,32 @@
                             </div>
                         </div>
                     </div>
-
-                    @if ($commandes->count() > 0)
-                    <h3 class="text-gray-700 text-xl font-medium mt-8">Packs achetés</h3>
-                    <div class="mt-4 w-full lg:w-1/3 bg-white p-4 rounded-md">
-                        <canvas id="packsChart"></canvas>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div>
+                            @if ($packs_chart->count() > 0)
+                            <h3 class="text-gray-700 text-xl font-medium mt-8">Packs achetés</h3>
+                            <div class="mt-4 w-full bg-white p-4 rounded-md">
+                                <canvas id="packsChart"></canvas>
+                            </div>
+                            @endif
+                        </div>
+                        <div>
+                            @if ($annonces_chart->count() > 0)
+                            <h3 class="text-gray-700 text-xl font-medium mt-8">Nombre d'annonces publiées par jour</h3>
+                            <div class="mt-4 w-full bg-white p-4 rounded-md">
+                                <canvas id="annoncesChart"></canvas>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="">
+                            @if ($annoncesByCategory->count() > 0)
+                            <h3 class="text-gray-700 text-xl font-medium mt-8">Types des annonces</h3>
+                            <div class="mt-4 w-64 h-64 bg-white p-4 rounded-md">
+                                <canvas id="annoncesByCategoryChart"></canvas>
+                            </div>
+                            @endif
+                        </div>
                     </div>
-                    @endif
-
                     @if ($users->count() > 0)
                     <h3 class="text-gray-700 text-xl font-medium mt-8">Users</h3>
                     <h6 class="text-blue-700 text-sm font-light"><a href="{{Route('admin.users.index')}}">Voir tout</a></h6>
@@ -361,7 +397,12 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900 flex items-center justify-end space-x-2">
                                                     <a href="{{Route('admin.users.edit',$user)}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-600 cursor-pointer"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></a>
-                                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                                    <button onclick="openModal('userModelConfirm')">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 cursor-pointer">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                        </svg>
+                                                    </button>
+                                                    {{-- <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="border-none bg-none cursor-pointer flex items-center">
@@ -369,7 +410,7 @@
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                             </svg>
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -440,7 +481,12 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900 flex items-center justify-end space-x-2">
                                                     <a href="{{Route('admin.managers.edit',$manager)}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-600 cursor-pointer"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></a>
-                                                    <form action="{{ route('admin.managers.destroy', $manager) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this manager?');">
+                                                    <button onclick="openModal('managerModelConfirm')">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 cursor-pointer">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                        </svg>
+                                                    </button>
+                                                    {{-- <form action="{{ route('admin.managers.destroy', $manager) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this manager?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="border-none bg-none cursor-pointer flex items-center">
@@ -448,7 +494,7 @@
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                             </svg>
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -526,7 +572,12 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900 flex items-center justify-end space-x-2">
                                                     <a href="{{Route('admin.packs.edit',$pack)}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-600 cursor-pointer"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></a>
-                                                    <form action="{{ route('admin.packs.destroy', $pack) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this pack?');">
+                                                    <button onclick="openModal('packModelConfirm')">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 cursor-pointer">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                        </svg>
+                                                    </button>
+                                                    {{-- <form action="{{ route('admin.packs.destroy', $pack) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this pack?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="border-none bg-none cursor-pointer flex items-center">
@@ -534,7 +585,7 @@
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                             </svg>
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -636,7 +687,6 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
-                                            {{-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th> --}}
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
                                     </thead>
@@ -817,8 +867,11 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date création</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date validation</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Manager</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
                                     </thead>
@@ -838,6 +891,10 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_validee->date_paiement}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_validee->date_validation}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -874,7 +931,13 @@
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_validee->type_annonce}}</div>
                                             </td>
 
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_validee->user->nom}}</div>
+                                            </td>
 
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_validee->manager->nom}}</div>
+                                            </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                                 <a href="{{Route('admin.annonce-legale.index', $annonce_validee->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">
@@ -885,7 +948,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="6">Sans</td>
+                                            <td colspan="6" class="text-center px-6 py-4 whitespace-nowrap text-sm leading-5 font-medium">Aucune annonce validéee disponible</td>
                                         </tr>
                                         @endforelse
                                     </tbody>
@@ -911,8 +974,11 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date création</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date annulation</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Manager</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
                                     </thead>
@@ -932,6 +998,10 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->date_paiement}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->date_validation}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -968,7 +1038,13 @@
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->type_annonce}}</div>
                                             </td>
 
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->user->nom}}</div>
+                                            </td>
 
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->manager->nom}}</div>
+                                            </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                                 <a href="{{Route('admin.annonce-legale.index', $annonce_annulee->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">
@@ -979,7 +1055,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="6">Sans</td>
+                                            <td colspan="6" class="text-center px-6 py-4 whitespace-nowrap text-sm leading-5 font-medium">Aucune annonce annulée disponible</td>
                                         </tr>
                                         @endforelse
                                     </tbody>
@@ -996,7 +1072,123 @@
             </main>
         </div>
     </div>
+
+    <div id="userModelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('userModelConfirm')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 pt-0 text-center">
+                <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Vous êtes sure vous voulez supprimer cet utilisateur ?</h3>
+                <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                    @csrf
+                    @method('DELETE')
+                    <button onclick="closeModal('userModelConfirm')" type="submit">
+                        Oui, je suis sure
+                    </button>
+                </form>
+                <button onclick="closeModal('userModelConfirm')"
+                    class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
+                    data-modal-toggle="delete-user-modal">
+                    Non, annuler
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="managerModelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('managerModelConfirm')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 pt-0 text-center">
+                <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Vous êtes sure vous voulez supprimer ce manager ?</h3>
+                <form action="{{ route('admin.managers.destroy', $manager) }}" method="POST" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                    @csrf
+                    @method('DELETE')
+                    <button onclick="closeModal('managerModelConfirm')" type="submit">
+                        Oui, je suis sure
+                    </button>
+                </form>
+                <button onclick="closeModal('managerModelConfirm')"
+                    class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
+                    data-modal-toggle="delete-manager-modal">
+                    Non, annuler
+                </bu>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="packModelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('packModelConfirm')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 pt-0 text-center">
+                <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Vous êtes sure vous voulez supprimer cet utilisateur ?</h3>
+                <form action="{{ route('admin.packs.destroy', $pack) }}" method="POST" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                    @csrf
+                    @method('DELETE')
+                    <button onclick="closeModal('packModelConfirm')" type="submit">
+                        Oui, je suis sure
+                    </button>
+                </form>
+                <button onclick="closeModal('packModelConfirm')"
+                    class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
+                    data-modal-toggle="delete-pack-modal">
+                    Non, annuler
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         var ctx = document.getElementById('packsChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -1021,6 +1213,92 @@
         });
 
     </script>
+
+    <script>
+        var ctx = document.getElementById('annoncesChart').getContext('2d');
+        var annoncesChart = new Chart(ctx, {
+            type: 'line', // or 'bar', 'pie', etc.
+            data: {
+                labels: [@foreach($annonces_chart as $annonce) "{{ $annonce->date }}", @endforeach],
+                datasets: [{
+                    label: 'Annnonces',
+                    data: [@foreach($annonces_chart as $annonce) {{ $annonce->total }}, @endforeach],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('annoncesByCategoryChart').getContext('2d');
+        var annoncesByCategoryChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: @json($categories),
+                datasets: [{
+                    label: 'Les types des annonces',
+                    data: @json($totals),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                aspectRatio: 1,
+                cutout: '50%',
+                animation: {
+                    animateRotate: false
+                }
+                    },
+        });
+    </script>
+
+    <script type="text/javascript">
+        window.openModal = function(modalId) {
+            document.getElementById(modalId).style.display = 'block'
+            document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+        }
+
+        window.closeModal = function(modalId) {
+            document.getElementById(modalId).style.display = 'none'
+            document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            document.getElementById('loading-dots').classList.add('hidden');
+            document.getElementById('dashboard-content').classList.remove('hidden');
+        }
+    </script>
+
 </body>
 
 </html>

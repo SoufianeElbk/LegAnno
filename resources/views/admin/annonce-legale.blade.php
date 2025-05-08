@@ -66,7 +66,11 @@
                     <span class="mx-3 text-sm">Commandes</span>
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                <a class="flex items-center px-6 py-2 mt-4
+                @if($Data['annonce']->statut == 'en préparation')
+                    text-gray-100 bg-gray-700 bg-opacity-25 
+                    @else text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 
+                    @endif"
                     href="{{Route('admin.annonces-en-preparation.index')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="humbleicons hi-pencil size-6"><path xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 7.5l3 3M4 20v-3.5L15.293 5.207a1 1 0 011.414 0l2.086 2.086a1 1 0 010 1.414L7.5 20H4z"/></svg>
 
@@ -106,7 +110,11 @@
                     <span class="mx-3 text-sm">Annonces annulées</span>
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                <a class="flex items-center px-6 py-2 mt-4 
+                 @if($Data['annonce']->statut == 'en attente de validation')
+                    text-gray-100 bg-gray-700 bg-opacity-25 
+                    @else text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 
+                    @endif"
                     href="{{Route('admin.annonces-en-attente.index')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 

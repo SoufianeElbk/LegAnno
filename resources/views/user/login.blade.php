@@ -12,7 +12,7 @@
 <body class="bg-indigo-700 font-Poppins dark:bg-gray-900 dark:text-white">
     <div class="container mx-auto">
         <div class="flex h-screen bg-indigo-700 dark:bg-gray-900">
-            <div class="w-full max-w-md m-auto bg-indigo-100 dark:bg-gray-800 rounded p-5">
+            <div class="w-full max-w-md m-auto bg-indigo-100 dark:bg-gray-800 sm:rounded p-5">
                 <header>
                     <img class="w-2/3 mx-auto mb-5" src="{{asset('/images/logo1.png')}}" alt="Logo" />
                 </header>
@@ -52,18 +52,18 @@
             </div>
         </div>
     </div>
-    <label class="inline-flex items-center cursor-pointer absolute top-4 right-4">
+    {{-- <label class="inline-flex items-center cursor-pointer absolute top-4 right-4">
         <input type="checkbox" value="" class="sr-only peer">
         <div id="toggle-dark-mode" class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-    </label>
+    </label> --}}
 </body>
 
-<script>
+{{-- <script>
     document.getElementById('toggle-dark-mode').addEventListener('click', function(){
         document.documentElement.classList.toggle('dark');
         document.querySelector('[alt=Logo]').getAttribute('src') == "/images/logo1.png" ? document.querySelector('[alt=Logo]').setAttribute('src',"{{asset('/images/logo2.png')}}") : document.querySelector('[alt=Logo]').setAttribute('src',"{{asset('/images/logo1.png')}}")
     });
-</script>
+</script> --}}
 <script>
     document.getElementById('togglePasswordVisibility').addEventListener('click', function () {
         const passwordInput = document.getElementById('password');

@@ -1,4 +1,4 @@
-<nav class="bg-indigo-700 p-4 mb-12">
+<nav class="bg-indigo-700 p-4">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset("/images/logo2.png") }}" class="h-8" alt="Logo" />
@@ -40,6 +40,11 @@
                 </li>
                 @endguest
                 @auth
+                <li class="lg:hover:border-b-2 border-b-2 lg:border-0 w-full lg:w-fit ">
+                    <a href="{{route('mes-annonces.index')}}"
+                        class="block py-2 px-3 rounded lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">Mes annonces légales
+                    </a>
+                </li>
                 <li class="relative w-full lg:w-fit flex flex-col">
                     <button id="dropdownNavbarLink" class="flex items-center space-x-2 py-2 px-3 rounded border-b-2 lg:border-0 lg:p-0 lg:dark:hover:text-blue-500 lg:dark:hover:bg-transparent">
                         <svg class="text-black lg:text-white" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
@@ -57,6 +62,14 @@
                                         <span class="text-lg font-semibold">Bienvenue {{Auth::user()->nom}}</span>
                                     </div>
                                 </li>
+
+                                <li class=" w-full">
+                                    <a href="{{route('packs.create')}}" class="flex space-x-2 items-center py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-black"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /></svg>                                          
+                                        <span>Mon solde : {{Auth::user()->solde}}</span>
+                                    </a>
+                                </li>
+
                                 <li class=" w-full">
                                     <a href="{{route('user.profile.edit')}}" class="flex space-x-2 items-center py-2 px-3 rounded lg:bg-transparent lg:dark:text-blue-500" aria-current="page">
                                         <svg class="text-black size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>

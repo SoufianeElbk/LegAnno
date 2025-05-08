@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') | LegAnno</title>
     @vite('resources/css/app.css')
+    @yield('css')
 
 </head>
 
@@ -96,6 +97,8 @@
         });
     </script>
     @endauth
+
+    @yield('scripts')
 </body>
 
 </html>

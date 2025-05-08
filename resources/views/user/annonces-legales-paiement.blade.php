@@ -27,9 +27,11 @@
                     </div>
                 </div>
             @endif
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 @if($Data['annonce']->paiement == 0) lg:grid-cols-2 gap-8 @endif">
                 <div>
+                    @if($Data['annonce']->paiement == 0)
                     <div class="w-fit mx-auto text-white text-xl font-bold mb-4">1- Saisie des informations</div>
+                    @endif
                     <div class="text-xs md:text-sm space-y-3 bg-white py-4 px-8 rounded-md">
                         <h1 class="text-lg font-bold mb-4">Votre annonce légale n° {{$Data['annonce']->id}}</h1>
                         @if($Data['type_annonce']==1)
@@ -300,7 +302,7 @@
                         @endif
                     </div>
                 </div>
-        
+                @if($Data['annonce']->paiement == 0)
                 <form action="{{Route('annonces-legales-paiement',[$Data['type_annonce'],$Data['annonce']->id])}}" method="POST">
                 @csrf
                 {{-- <div class="text-black"> --}}
@@ -311,7 +313,7 @@
                                 <input type="hidden" name="annonce_id" value="{{$Data['annonce']->id}}">
                                 <div class=""><input required class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="mode_paiement" value="Carte Bancaire"><label class="ms-2 text-sm font-medium  dark:text-gray-300">Carte Bancaire (150 DH)</label></div>
                                 <div class=""><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="mode_paiement" value="Paypal"><label class="ms-2 text-sm font-medium  dark:text-gray-300">Paypal  (150 DH)</label></div>
-                                <div class=""><input @if(Auth::user()->solde == 0) disabled @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="mode_paiement" value="Votre Solde"><label class="ms-2 text-sm font-medium  dark:text-gray-300">Votre Solde (solde actuel : {{Auth::user()->solde}}) @if (Auth::user()->solde == 0)<a href="/" class="text-xs underline">Commander un pack maintenant</a>@endif</label></div>
+                                <div class=""><input @if(Auth::user()->solde == 0) disabled @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="mode_paiement" value="Solde"><label class="ms-2 text-sm font-medium  dark:text-gray-300">Votre Solde (solde actuel : {{Auth::user()->solde}}) @if (Auth::user()->solde == 0)<a href="/" class="text-xs underline">Commander un pack maintenant</a>@endif</label></div>
                             </div>
                             <div class="mb-4">
                                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adreese de facturation</label>
@@ -321,6 +323,7 @@
                 {{-- </div> --}}
                 <button type="submit" class="bg-orange-400 p-3 rounded-xl text-md sm:text-lg font-medium text-white w-full mt-4">PROCÉDEZ AU PAIEMENT</button>
                 </form>
+                @endif
             </div>
     </div>
     </div>

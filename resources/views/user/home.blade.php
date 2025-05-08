@@ -3,23 +3,23 @@
 @section('content')
     <div class="container text-white mx-auto p-6">
         @include('user.components.nav')
-        <div class="flex items-bottom mb-12 p-4">
+        <div class="flex items-bottom p-4 pt-12">
             <div class="max-w-screen-xl flex items-center justify-between mx-auto flex-col lg:flex-row">
                 <div class="flex flex-col w-full lg:w-2/3">
-                    <h1 class="text-2xl md:text-3xl font-semibold">Le journal LegAnno est un service spécialisé  dans l'information légale, juridique et financière.</h1>
+                    <h1 class="text-2xl md:text-3xl font-semibold text-justify">Le journal LegAnno est un service spécialisé  dans l'information légale, juridique et financière.</h1>
                     <div class="grid grid-cols-1 md:grid-cols-3 text-sm sm:text-md font-semibold">
                         <button class="rounded-full bg-yellow-300 text-black p-4 mt-4 w-fit hover:bg-yellow-400 md:col-span-2"><a href="#annonces-legales">Publier une annonce légale ?</a></button>
                         <button class="rounded-full bg-yellow-300 text-black p-4 mt-4 w-fit hover:bg-yellow-400 md:justify-self-end">Besoin d'aide ?</button>
                     </div>
                 </div>
-                <div class="w-full lg:w-2/3 mx-auto">
-                    <img src="{{ asset("/images/download.png") }}" alt="" class="h-auto w-full lg:w-2/3 mx-auto">
+                <div class="w-full flex justify-end lg:w-2/3 mx-auto">
+                    <img src="{{ asset("/images/download.png") }}" alt="" class="h-auto w-full lg:w-2/3">
                 </div>
             </div>
         </div>
         <div class="mb-12 p-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-auto max-w-screen-xl">
-                <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg">
+                <div class=" bg-[#FFF7FC] text-black p-4 rounded-md">
                     <h1 class="text-xl font-bold mb-4">Publiez votre annonce légale au meilleur prix</h1>
                     <ul class="text-sm md:text-xs space-y-2">
                         <li class="flex items-center">
@@ -42,12 +42,12 @@
                         </li>
                     </ul>
                 </div>
-                <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg grid">
+                <div class=" bg-[#FFF7FC] text-black p-4 rounded-md grid">
                     <h1 class="text-xl font-bold mb-4">Packs de recharges d’annonces légales</h1>
                     <p class="text-sm md:text-xs">Plus de 30% de réductionsur le prix unitaire !</p>
                     <button class="w-full h-fit self-end py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"><a href="#packs">Commander un pack</a></button>
                 </div>
-                <div class=" bg-[#FFF7FC] text-black p-4 rounded-lg grid grid-cols-3">
+                <div class=" bg-[#FFF7FC] text-black p-4 rounded-md grid grid-cols-3">
                     <div>
                         <img class="max-w-full" src="{{asset('/images/support.png')}}" alt="support">
                     </div>
@@ -66,7 +66,7 @@
             <div class=" mx-auto max-w-screen-xl">
             <h1 class="text-4xl font-medium mb-8 w-full text-center"><span class="font-extrabold">LegAnno</span> offre un service de publication d'annonces légales en ligne.</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <div class="bg-[#FFF7FC] text-black p-4 rounded-lg">
+                <div class="bg-[#FFF7FC] text-black p-4 rounded-md">
                     <h1 class="text-2xl font-bold border-b-4 border-indigo-400 w-fit mb-4">Constitution de société</h1>
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
@@ -83,7 +83,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-[#FFF7FC] text-black p-4 rounded-lg">
+                <div class="bg-[#FFF7FC] text-black p-4 rounded-md">
                     <h1 class="text-2xl font-bold border-b-4 border-indigo-400 w-fit mb-4">Cessation d'activité</h1>
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">
@@ -100,7 +100,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-[#FFF7FC] text-black p-4 rounded-lg">
+                <div class="bg-[#FFF7FC] text-black p-4 rounded-md">
                     <h1 class="text-2xl font-bold border-b-4 border-indigo-400 w-fit mb-4">Modification de société</h1>
                     <ul class="text-sm space-y-2 font-medium">
                         <li class="flex items-center">

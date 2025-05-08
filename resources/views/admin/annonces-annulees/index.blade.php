@@ -192,8 +192,11 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date création</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date annulation</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Manager</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
                                     </thead>
@@ -213,6 +216,10 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->date_paiement}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->date_validation}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -248,8 +255,14 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->type_annonce}}</div>
                                             </td>
+                                            
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->user->nom}}</div>
+                                            </td>
 
-
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_annulee->manager->nom}}</div>
+                                            </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                                 <a href="{{Route('admin.annonce-legale.index', $annonce_annulee->id)}}" class="text-indigo-600 hover:text-indigo-900 flex flex-col items-center">

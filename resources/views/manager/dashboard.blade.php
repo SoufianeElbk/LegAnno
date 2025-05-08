@@ -140,8 +140,8 @@
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">5</h4>
-                                        <div class="text-gray-500 text-sm">Annonces approuvées</div>
+                                        <h4 class="text-2xl font-semibold text-gray-700">{{Auth::guard('manager')->user()->annonces_legales()->where('statut', '=', 'validée')->count()}}</h4>
+                                        <div class="text-gray-500 text-sm">Annonces validées</div>
                                     </div>
                                 </div>
                             </div>
@@ -159,8 +159,8 @@
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">2</h4>
-                                        <div class="text-gray-500 text-sm">Annonces rejetées</div>
+                                        <h4 class="text-2xl font-semibold text-gray-700">{{Auth::guard('manager')->user()->annonces_legales()->where('statut', '=', 'annulée')->count()}}</h4>
+                                        <div class="text-gray-500 text-sm">Annonces annulées</div>
                                     </div>
                                 </div>
                             </div>
@@ -271,6 +271,7 @@
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">id</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date création</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date paiement</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date validation</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Société</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Type annonce</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Décision</th>
@@ -293,6 +294,10 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="text-sm leading-5 text-gray-900">{{$annonce_traitee->date_paiement}}</div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="text-sm leading-5 text-gray-900">{{$annonce_traitee->date_validation}}</div>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -349,7 +354,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="6">Sans</td>
+                                            <td colspan="8">Sans</td>
                                         </tr>
                                         @endforelse
                                     </tbody>
